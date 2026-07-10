@@ -9,6 +9,10 @@
   }
   <p-select [options]="options"
       [(ngModel)]="value"
+      [size]="size"
+      [variant]="variant"
+      [fluid]="fluid"
+      [loading]="loading"
       [optionValue]="optionValue"
       [optionLabel]="optionLabel"
       [virtualScroll]="virtualScroll"
@@ -24,6 +28,11 @@
       [disabled]="isDisabled"
       [invalid]="isInvalid"
       [placeholder]="placeholder">
+    <!-- Spinner de carga con Material Symbols (PrimeIcons no está en el
+         proyecto). Reemplaza el loadingIcon por defecto de PrimeNG. -->
+    <ng-template #loadingicon>
+      <span class="material-symbols-outlined select-loading-icon">progress_activity</span>
+    </ng-template>
   </p-select>
   @if (isMessageVisible) {
     <app-message

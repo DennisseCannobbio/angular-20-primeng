@@ -1,10 +1,21 @@
 import { Component, Input } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { Message, MessageSeverity, MessageVariant } from '../message/message';
+
+/** Tamaño del input (mapea a pSize de PrimeNG). */
+export type InputSize = 'small' | 'large';
+
+/** Variante visual del input (mapea a variant de PrimeNG). */
+export type InputVariant = 'outlined' | 'filled';
+
+/** Posición del ícono dentro del campo (icon field). */
+export type IconPosition = 'left' | 'right';
 
 @Component({
   selector: 'app-input-text',
-  imports: [InputTextModule, Message],
+  imports: [InputTextModule, IconFieldModule, InputIconModule, Message],
   templateUrl: './input-text.html',
   styleUrl: './input-text.scss',
 })
@@ -14,6 +25,24 @@ export class InputText {
 
   /** Indica si el campo es obligatorio. */
   @Input() required: boolean = false;
+
+  /** Tamaño del input: 'small' | 'large' (por defecto, tamaño base). */
+  @Input() size?: InputSize;
+
+  /** Variante visual: 'outlined' (default) | 'filled'. */
+  @Input() variant: InputVariant = 'outlined';
+
+  /** Si es true, el input ocupa todo el ancho de su contenedor. */
+  @Input() fluid: boolean = false;
+
+  /**
+   * Ícono (Material Symbols) a mostrar DENTRO del input.
+   * Se renderiza vía p-iconfield/p-inputicon.
+   */
+  @Input() fieldIcon?: string;
+
+  /** Posición del fieldIcon dentro del campo: 'left' (default) | 'right'. */
+  @Input() fieldIconPosition: IconPosition = 'left';
 
   /** Estado de error: si es true, los bordes se pintan de rojo y se muestra el errorMessage (si existe). */
   @Input() isInvalid: boolean = false;

@@ -7,7 +7,41 @@
       }
     </label>
   }
-  <input type="text" pInputText [disabled]="isDisabled" [invalid]="isInvalid" [placeholder]="placeholder"/>
+
+  @if (fieldIcon) {
+    <!-- Con ícono dentro del campo (Material Symbols vía p-iconfield).
+         El lado lo controla la clase p-iconfield-left/right (via iconPosition)
+         + el CSS del componente; no dependemos de :first-child/:last-child,
+         porque los bloques @if de Angular insertan comentarios ancla que los
+         rompen. -->
+    <p-iconfield [iconPosition]="fieldIconPosition">
+      <input
+        type="text"
+        pInputText
+        [pSize]="$any(size)"
+        [variant]="variant"
+        [fluid]="fluid"
+        [disabled]="isDisabled"
+        [invalid]="isInvalid"
+        [placeholder]="placeholder"
+      />
+      <p-inputicon>
+        <span class="material-symbols-outlined">{{ fieldIcon }}</span>
+      </p-inputicon>
+    </p-iconfield>
+  } @else {
+    <input
+      type="text"
+      pInputText
+      [pSize]="$any(size)"
+      [variant]="variant"
+      [fluid]="fluid"
+      [disabled]="isDisabled"
+      [invalid]="isInvalid"
+      [placeholder]="placeholder"
+    />
+  }
+
   @if (isMessageVisible) {
     <app-message
       [severity]="displaySeverity"

@@ -16,13 +16,27 @@
 }
 
 :host ::ng-deep {
-  // Aseguramos que el select ocupe todo el ancho disponible por defecto
-  .p-select {
-    width: 100%;
-  }
+  // El ancho lo controla el @Input() fluid (que mapea a [fluid] de PrimeNG):
+  // por defecto el select toma su ancho natural; con fluid ocupa el 100%.
+  // Por eso NO forzamos width aquí.
 
   .p-select.p-invalid:not(.p-disabled):hover,
   .p-select.p-invalid:not(.p-disabled).p-focus {
     border-color: var(--p-form-field-invalid-border-color);
+  }
+
+  // Spinner de carga (Material Symbols) que reemplaza el loadingIcon de
+  // PrimeNG. Girado con una animación CSS propia.
+  .select-loading-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--p-on-surface-02);
+    animation: select-spin 1s linear infinite;
+  }
+}
+
+@keyframes select-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
