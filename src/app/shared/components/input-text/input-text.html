@@ -1,0 +1,20 @@
+<div class="input-container">
+  @if (label) {
+    <label class="label">
+      {{ label }}
+      @if (required) {
+        <span class="required-asterisk">*</span>
+      }
+    </label>
+  }
+  <input type="text" pInputText [disabled]="isDisabled" [invalid]="isInvalid" [placeholder]="placeholder"/>
+  @if (isMessageVisible) {
+    <app-message
+      [severity]="displaySeverity"
+      [variant]="messageVariant"
+      [materialIcon]="materialIcon"
+      [text]="displayMessage"
+      size="small"
+    />
+  }
+</div>

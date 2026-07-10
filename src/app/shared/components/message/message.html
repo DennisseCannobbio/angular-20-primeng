@@ -1,0 +1,18 @@
+<p-message
+  [severity]="severity"
+  [variant]="variant"
+  [size]="size"
+  [closable]="closable"
+  [life]="life"
+>
+  @if (materialIcon) {
+    <ng-template #icon>
+      <span class="material-symbols-outlined">{{ materialIcon }}</span>
+    </ng-template>
+  }
+  @if (text) {
+    {{ text }}
+  } @else {
+    <ng-content></ng-content>
+  }
+</p-message>

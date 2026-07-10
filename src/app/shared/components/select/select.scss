@@ -1,0 +1,28 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-size: var(--bs-font-size-neg-1); // 14px — escala del Figma
+  line-height: var(--bs-line-height-title); // 125% (texto corto)
+  color: var(--p-on-surface-01);
+
+  .required-asterisk {
+    color: var(--p-error-01);
+    margin-left: 0.125rem;
+  }
+}
+
+:host ::ng-deep {
+  // Aseguramos que el select ocupe todo el ancho disponible por defecto
+  .p-select {
+    width: 100%;
+  }
+
+  .p-select.p-invalid:not(.p-disabled):hover,
+  .p-select.p-invalid:not(.p-disabled).p-focus {
+    border-color: var(--p-form-field-invalid-border-color);
+  }
+}

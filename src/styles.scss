@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tipografía global (fuente Overpass + escala del Figma). Se importa primero
+   para que las @font-face y las variables --bs-* estén disponibles en todo
+   el árbol. */
+@use 'theme/typography';
+@use 'theme/icons';
+
+/* Orden de capas CSS: lo que esté en "app-styles" gana a "primeng". */
+@layer app-styles, primeng;
+
+/* Tus estilos globales van aquí (dentro de la capa app-styles para
+   sobrescribir PrimeNG sin !important). */
+@layer app-styles {
+  html,
+  body {
+    margin: 0;
+    height: 100%;
+  }
+}

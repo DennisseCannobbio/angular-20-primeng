@@ -1,0 +1,226 @@
+:host {
+  display: block;
+  background: var(--p-surface-01);
+  color: var(--p-on-surface-01);
+  min-height: 100vh;
+}
+
+.preview {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  /* Usar la fuente del tema (Overpass), heredada del body. */
+  font-family: var(--bs-font-family-base);
+}
+
+h1 {
+  margin: 0 0 0.25rem;
+  color: var(--p-on-surface-02);
+}
+
+.subtitle {
+  margin: 0 0 1.5rem;
+  color: var(--p-on-surface-01);
+}
+
+section {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--p-border-01);
+}
+
+h2 {
+  margin: 0 0 1rem;
+  color: var(--p-on-surface-02);
+}
+
+h3 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--p-on-surface-01);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 480px;
+}
+
+/* ---- Muestra de tipografía ---- */
+.type-scale {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.type-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--p-border-01);
+}
+
+.type-row__meta {
+  flex: 0 0 190px;
+  font-size: 0.72rem;
+  color: var(--p-on-surface-01);
+  white-space: nowrap;
+}
+
+.type-row__sample {
+  color: var(--p-on-surface-02);
+  line-height: var(--bs-line-height-title);
+  /* No romper el layout con los tamaños grandes (70/84px). */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.type-samples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.type-sample {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.type-sample__text {
+  font-size: var(--bs-font-size-02);
+  color: var(--p-on-surface-02);
+}
+
+.type-lh {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.type-lh__text {
+  margin: 0.35rem 0 0;
+  color: var(--p-on-surface-02);
+  max-width: var(--bs-measure);
+}
+
+.type-measure {
+  margin: 0;
+  max-width: var(--bs-measure);
+  color: var(--p-on-surface-02);
+  line-height: var(--bs-line-height-body);
+  /* Marca visual del límite de medida. */
+  border-left: 3px solid var(--p-accent-border-01);
+  padding-left: 0.75rem;
+}
+
+/* ---- Muestras de dimensión (radius / spacing / sizing) ---- */
+.dim-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.dim-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dim-radius {
+  width: 72px;
+  height: 72px;
+  background: var(--p-accent-container-01);
+  border: 1px solid var(--p-accent-border-01);
+}
+
+.dim-cell__label {
+  font-size: 0.72rem;
+  color: var(--p-on-surface-01);
+  white-space: nowrap;
+}
+
+.dim-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.dim-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dim-bar-row__meta {
+  flex: 0 0 90px;
+  font-size: 0.72rem;
+  color: var(--p-on-surface-01);
+  white-space: nowrap;
+}
+
+.dim-bar {
+  height: 16px;
+  background: var(--p-accent-01);
+  border-radius: 2px;
+  /* spacing/00 = 0 → sin ancho; garantizar que la fila siga visible. */
+  min-width: 1px;
+}
+
+.dim-bar--sizing {
+  background: var(--p-palette-brand-05, var(--p-accent-02));
+}
+
+.dim-border-sample {
+  flex: 1 1 auto;
+  border-top-style: solid;
+  border-top-color: var(--p-on-surface-02);
+  max-width: 240px;
+}
+
+/* ---- Swatches de foundations ---- */
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.swatch {
+  border: 1px solid var(--p-border-01);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--p-container-01);
+}
+
+.swatch__color {
+  height: 56px;
+  /* Tablero para distinguir colores claros/transparentes del fondo. */
+  background-image:
+    linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
+    linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+.swatch__label {
+  display: block;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.72rem;
+  color: var(--p-on-surface-01);
+  border-top: 1px solid var(--p-border-01);
+  word-break: break-all;
+}

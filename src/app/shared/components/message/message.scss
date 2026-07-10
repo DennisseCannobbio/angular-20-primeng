@@ -1,0 +1,11 @@
+// Ícono Material Symbols dentro del p-message.
+// `1.25em` lo liga al tamaño del texto del mensaje (más pequeño que los 24px
+// por defecto de Material) y `line-height: 1` + el flex del p-message lo dejan
+// centrado verticalmente con el texto.
+:host ::ng-deep .material-symbols-outlined {
+  font-size: 1.25em;
+  line-height: 1;
+  // Ajuste óptico para centrar visualmente el ícono con la tipografía 
+  // Overpass, la cual suele tener un centro visual un poco más elevado.
+  transform: translateY(-0.1em);
+}

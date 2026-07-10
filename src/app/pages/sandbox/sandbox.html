@@ -1,0 +1,208 @@
+<div class="preview">
+  <h1>Muestra del tema · Backoffice Notificaciones</h1>
+  <p class="subtitle">
+    Página de verificación visual de los colores del Figma aplicados al tema de PrimeNG.
+  </p>
+
+  <!-- ============ Botones por severidad ============ -->
+  <section>
+    <h2>Botones (severity)</h2>
+    <div class="row">
+      @for (s of severities; track s.label) {
+      <p-button [label]="s.label" [severity]="s.severity" />
+      }
+    </div>
+
+    <h3>Outlined</h3>
+    <div class="row">
+      @for (s of severities; track s.label) {
+      <p-button [label]="s.label" [severity]="s.severity" [outlined]="true" />
+      }
+    </div>
+
+    <h3>Text</h3>
+    <div class="row">
+      @for (s of severities; track s.label) {
+      <p-button [label]="s.label" [severity]="s.severity" [text]="true" />
+      }
+    </div>
+  </section>
+
+  <!-- ============ Tags por severidad ============ -->
+  <section>
+    <h2>Tags (severity)</h2>
+    <div class="row">
+      @for (s of tagSeverities; track s.label) {
+      <p-tag [value]="s.label" [severity]="s.severity" />
+      }
+    </div>
+  </section>
+
+  <!-- ============ Mensajes por severidad ============ -->
+  <section>
+    <h2>Mensajes (severity)</h2>
+    <div class="col">
+      <app-message severity="success" materialIcon="check_circle">Operación realizada con éxito.</app-message>
+      <app-message severity="info" materialIcon="info">Este es un mensaje informativo.</app-message>
+      <app-message severity="warn" materialIcon="warning">Ten cuidado con esta acción.</app-message>
+      <app-message severity="error" materialIcon="error">Ocurrió un error al procesar.</app-message>    </div>
+  </section>
+
+  <!-- ============ Input ============ -->
+  <section>
+    <h2>Input Text</h2>
+    <app-input-text label="Nombre" [label]="'Input Propio'" [isDisabled]="false" [placeholder]="'Placeholder aca'"
+      [errorMessage]="'Debes ingresar una URL de destino válida. Campo obligatorio'" [isInvalid]="true"
+      [materialIcon]="'error'" [required]="true"></app-input-text>
+  </section>
+
+  <!-- ============ Select ============ -->
+  <section>
+    <h2>Select</h2>
+    <div class="row" style="gap: 2rem; align-items: flex-start;">
+      <div class="col" style="flex: 1;">
+        <h3>Normal (con validación)</h3>
+        <app-select label="Opciones" [options]="selectOptions" placeholder="Selecciona una opción" optionLabel="label"
+          optionValue="value" [isInvalid]="true" [required]="true" errorMessage="Debes seleccionar una opción válida."
+          materialIcon="error">
+        </app-select>
+      </div>
+
+      <div class="col" style="flex: 1;">
+        <h3>Virtual Scroll (10,000 ítems)</h3>
+        <app-select label="Data masiva" [options]="virtualScrollOptions" [required]="false"
+          placeholder="Busca y scrollea..." optionLabel="label" optionValue="value" [virtualScroll]="true">
+        </app-select>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Tipografía ============ -->
+  <section>
+    <h2>Tipografía (fuente Overpass + escala del Figma)</h2>
+    <p class="subtitle">
+      Todo usa <code>var(--bs-*)</code>. La familia y el tamaño base se heredan del
+      <code>body</code>; PrimeNG hereda de ahí también.
+    </p>
+
+    <h3>Escala de tamaños</h3>
+    <div class="type-scale">
+      @for (t of typeScale; track t.token) {
+      <div class="type-row">
+        <code class="type-row__meta">font-size/{{ t.token }} · {{ t.px }}px</code>
+        <span class="type-row__sample" [style.font-size]="'var(' + t.var + ')'">
+          Notificaciones
+        </span>
+      </div>
+      }
+    </div>
+
+    <h3>Pesos</h3>
+    <div class="type-samples">
+      @for (w of typeWeights; track w.label) {
+      <div class="type-sample">
+        <code class="type-row__meta">{{ w.label }}</code>
+        <span class="type-sample__text" [style.font-weight]="'var(' + w.var + ')'">Overpass — El veloz murciélago hindú
+          comía feliz.</span>
+      </div>
+      }
+    </div>
+
+    <h3>Cursiva</h3>
+    <div class="type-samples">
+      <div class="type-sample">
+        <code class="type-row__meta">italic</code>
+        <span class="type-sample__text" style="font-style: italic">Overpass en cursiva — texto de ejemplo con acentos:
+          ñ, á, é, €.</span>
+      </div>
+    </div>
+
+    <h3>Interlineado</h3>
+    <div class="type-lh">
+      @for (lh of typeLineHeights; track lh.label) {
+      <div class="type-lh__block">
+        <code class="type-row__meta">{{ lh.label }}</code>
+        <p class="type-lh__text" [style.line-height]="'var(' + lh.var + ')'">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+          venenatis euismod aliquet nunc malesuada. Lacus condimentum fames eu
+          convallis integer justo sed.
+        </p>
+      </div>
+      }
+    </div>
+
+    <h3>Longitud de línea legible (<code>--bs-measure</code>, 45–75 caracteres)</h3>
+    <p class="type-measure">
+      El ancho ideal de una línea de texto se encuentra entre los 45 y los 75
+      caracteres, incluyendo espacios. Este bloque está limitado con
+      <code>max-width: var(--bs-measure)</code> para mantener la lectura cómoda.
+    </p>
+  </section>
+
+  <!-- ============ Escalas de dimensión ============ -->
+  <section>
+    <h2>Dimensiones (border, spacing, sizing)</h2>
+    <p class="subtitle">
+      Estas escalas las genera el preset. Se usan directo con
+      <code>var(--p-...)</code>, sin variables <code>--bs-*</code> extra.
+    </p>
+
+    <h3>radius-border (<code>--p-radius-border-*</code>)</h3>
+    <div class="dim-grid">
+      @for (r of radiusScale; track r.token) {
+      <div class="dim-cell">
+        <div class="dim-radius" [style.border-radius]="'var(' + r.var + ')'"></div>
+        <code class="dim-cell__label">{{ r.token }} · {{ r.px }}px</code>
+      </div>
+      }
+    </div>
+
+    <h3>spacing (<code>--p-spacing-*</code>)</h3>
+    <div class="dim-list">
+      @for (s of spacingScale; track s.token) {
+      <div class="dim-bar-row">
+        <code class="dim-bar-row__meta">{{ s.token }} · {{ s.px }}px</code>
+        <div class="dim-bar" [style.width]="'var(' + s.var + ')'"></div>
+      </div>
+      }
+    </div>
+
+    <h3>sizing (<code>--p-sizing-*</code>)</h3>
+    <div class="dim-list">
+      @for (s of sizingScale; track s.token) {
+      <div class="dim-bar-row">
+        <code class="dim-bar-row__meta">{{ s.token }} · {{ s.px }}px</code>
+        <div class="dim-bar dim-bar--sizing" [style.width]="'var(' + s.var + ')'"></div>
+      </div>
+      }
+    </div>
+
+    <h3>sizing-border (<code>--p-sizing-border-*</code>)</h3>
+    <div class="dim-list">
+      @for (b of sizingBorderScale; track b.token) {
+      <div class="dim-bar-row">
+        <code class="dim-bar-row__meta">{{ b.token }} · {{ b.px }}px</code>
+        <div class="dim-border-sample" [style.border-top-width]="'var(' + b.var + ')'"></div>
+      </div>
+      }
+    </div>
+  </section>
+
+  <!-- ============ Swatches de foundations ============ -->
+  <section>
+    <h2>Foundations (variables CSS del preset)</h2>
+    <p class="subtitle">Cada recuadro pinta directamente su <code>var(--p-...)</code>.</p>
+
+    @for (group of foundationGroups; track group.name) {
+    <h3>color/{{ group.name }}</h3>
+    <div class="swatches">
+      @for (v of group.vars; track v) {
+      <div class="swatch">
+        <div class="swatch__color" [style.background]="'var(' + v + ')'"></div>
+        <code class="swatch__label">{{ v }}</code>
+      </div>
+      }
+    </div>
+    }
+  </section>
+</div>

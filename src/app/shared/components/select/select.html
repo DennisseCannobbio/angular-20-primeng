@@ -1,0 +1,37 @@
+<div class="input-container">
+  @if (label) {
+    <label class="label">
+      {{ label }}
+      @if (required) {
+        <span class="required-asterisk">*</span>
+      }
+    </label>
+  }
+  <p-select [options]="options"
+      [(ngModel)]="value"
+      [optionValue]="optionValue"
+      [optionLabel]="optionLabel"
+      [virtualScroll]="virtualScroll"
+      [virtualScrollItemSize]="virtualScrollItemSize"
+      [scrollHeight]="scrollHeight"
+      [appendTo]="appendTo"
+      [checkmark]="checkmark"
+      [filter]="filter"
+      [filterBy]="filterBy"
+      [emptyMessage]="emptyMessage"
+      [emptyFilterMessage]="emptyFilterMessage"
+      [showClear]="showClear"
+      [disabled]="isDisabled"
+      [invalid]="isInvalid"
+      [placeholder]="placeholder">
+  </p-select>
+  @if (isMessageVisible) {
+    <app-message
+      [severity]="displaySeverity"
+      [variant]="messageVariant"
+      [materialIcon]="materialIcon"
+      [text]="displayMessage"
+      size="small"
+    />
+  }
+</div>

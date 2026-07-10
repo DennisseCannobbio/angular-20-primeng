@@ -1,0 +1,69 @@
+/**
+ * Iconos del Backoffice de Notificaciones — Material Symbols (Outlined).
+ *
+ * Variante "Symbols" (la actual de Google, activamente mantenida), NO los
+ * "Material Icons" clásicos. Self-hosted igual que la tipografía: un único
+ * .woff2 VARIABLE en public/assets/fonts/ que trae TODO el set de iconos y
+ * cubre los 4 ejes (opsz, wght, FILL, GRAD) sin descargar archivos extra.
+ *
+ * Uso en plantillas:
+ *   <span class="material-symbols-outlined">home</span>
+ * El texto del elemento ("home") es el NOMBRE del icono; la ligadura de la
+ * fuente lo convierte en el glifo. Catálogo: https://fonts.google.com/icons
+ *
+ * Ejes ajustables por CSS (ver clases modificadoras y `font-variation-settings`
+ * más abajo). `font-display: block` evita mostrar el nombre del icono como
+ * texto mientras la fuente carga (el clásico "flash of unstyled icon").
+ */
+
+/* ---------------------------------------------------------------------------
+ * 1) Carga de la fuente (self-hosted en public/assets/fonts/)
+ * Un solo archivo variable cubre pesos 100–700 y todos los ejes.
+ * ------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700; /* rango variable */
+  font-display: block;
+  src: url('/assets/fonts/material-symbols-outlined-var.woff2') format('woff2');
+}
+
+/* ---------------------------------------------------------------------------
+ * 2) Clase base del icono.
+ * Dentro de @layer app-styles para convivir con el orden de capas del proyecto
+ * (ver styles.scss). `font-size: 1em` hace que el icono escale con el texto
+ * que lo rodea; sobre-escríbelo puntualmente donde necesites otro tamaño.
+ * ------------------------------------------------------------------------- */
+@layer app-styles {
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.5rem; /* 24px — tamaño de referencia de Material */
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+
+    /* Ejes por defecto: sin relleno, opsz 24, peso 400, grado 0. */
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+
+  /* Modificadores útiles (opcionales). Combínalos con la clase base. */
+  .material-symbols-outlined.--filled {
+    font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+}

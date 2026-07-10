@@ -1,0 +1,117 @@
+/**
+ * Tipografía del Backoffice de Notificaciones.
+ *
+ * Fuente y escala transcritas del Figma (Foundations → Fuentes tipográficas).
+ * Fuente: Overpass (self-hosted, variable 100–900, normal e itálica).
+ *
+ * ⚠️ PrimeNG NO tiene tokens de tipografía: sus componentes HEREDAN la fuente,
+ * tamaño, etc. del CSS normal. Por eso la tipografía NO va en brand-preset.ts:
+ * se define aquí como variables CSS y se aplica al `body`; PrimeNG y toda la app
+ * la heredan de ahí. Editar aquí cambia la tipografía en un solo lugar.
+ *
+ * Documentación: ver Contextos/theming-primeng.md §11.
+ *
+ * Nota de prefijos: el Figma usa `--bs-font-*`; aquí se replican esos nombres
+ * para que el mapeo con el Figma sea 1:1.
+ */
+
+/* ---------------------------------------------------------------------------
+ * 1) Carga de la fuente (self-hosted en public/assets/fonts/)
+ * Un solo archivo variable por eje cubre TODOS los pesos (100–900).
+ * `latin` + `latin-ext` cubren castellano (acentos, ñ, €, comillas...).
+ * `font-display: swap` para no bloquear el render mientras carga.
+ * ------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 100 900; /* rango variable */
+  font-display: swap;
+  src: url('/assets/fonts/overpass-latin-normal-var.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/overpass-latin-ext-normal-var.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/overpass-latin-italic-var.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/overpass-latin-ext-italic-var.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------------------------------------------------------------------------
+ * 2) Tokens de tipografía (variables CSS) — transcritos del Figma.
+ * Nombres 1:1 con el Figma (`--bs-*`). Disponibles globalmente en :root.
+ * ------------------------------------------------------------------------- */
+:root {
+  /* Familia base (Figma: --bs-font-family-base) */
+  --bs-font-family-base: 'Overpass', sans-serif;
+
+  /* Pesos (Figma: Regular / Bold) */
+  --bs-font-weight-regular: 400;
+  --bs-font-weight-bold: 700;
+
+  /* Escala de tamaños (base 16px; Major Second 1.125 body / Minor Third 1.200
+     títulos, ajustado al par más cercano). Del token neg-3 al 10. */
+  --bs-font-size-neg-3: 0.625rem; /* 10px */
+  --bs-font-size-neg-2: 0.75rem;  /* 12px */
+  --bs-font-size-neg-1: 0.875rem; /* 14px */
+  --bs-font-size-base: 1rem;      /* 16px — referencia */
+  --bs-font-size-01: 1.125rem;    /* 18px */
+  --bs-font-size-02: 1.25rem;     /* 20px */
+  --bs-font-size-03: 1.5rem;      /* 24px */
+  --bs-font-size-04: 1.75rem;     /* 28px */
+  --bs-font-size-05: 2rem;        /* 32px */
+  --bs-font-size-06: 2.5rem;      /* 40px */
+  --bs-font-size-07: 3rem;        /* 48px */
+  --bs-font-size-08: 3.5rem;      /* 56px */
+  --bs-font-size-09: 4.375rem;    /* 70px */
+  --bs-font-size-10: 5.25rem;     /* 84px */
+
+  /* Interlineado (Figma: 150% cuerpos, 125% títulos). Sin unidad para que
+     escale con el font-size de cada elemento. */
+  --bs-line-height-body: 1.5;   /* 150% — cuerpos de texto */
+  --bs-line-height-title: 1.25; /* 125% — títulos / headlines */
+
+  /* Longitud de línea legible (Figma: 45–75 caracteres). Útil para limitar el
+     ancho de bloques de texto largo: max-width: var(--bs-measure). */
+  --bs-measure: 66ch;
+}
+
+/* ---------------------------------------------------------------------------
+ * 3) Base tipográfica aplicada al documento.
+ * Dentro de @layer app-styles para convivir con el orden de capas del proyecto.
+ * PrimeNG hereda de `body` (no tokeniza tipografía), así que con esto sus
+ * componentes y toda la app usan Overpass + tamaño/interlineado base.
+ * ------------------------------------------------------------------------- */
+@layer app-styles {
+  body {
+    font-family: var(--bs-font-family-base);
+    font-size: var(--bs-font-size-base);
+    font-weight: var(--bs-font-weight-regular);
+    line-height: var(--bs-line-height-body);
+  }
+}

@@ -1,0 +1,29 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-size: var(--bs-font-size-neg-1); // 14px — escala del Figma
+  line-height: var(--bs-line-height-title); // 125% (texto corto)
+  color: var(--p-on-surface-01);
+
+  .required-asterisk {
+    color: var(--p-error-01);
+    margin-left: 0.125rem;
+  }
+}
+
+// Estado invalid "pegajoso": por defecto PrimeNG deja que el hover/focus
+// (mayor especificidad) pise el borde rojo del .p-invalid. Aquí forzamos que
+// el borde de error se mantenga también en hover y focus. Usa el mismo token
+// del preset (formField.invalidBorderColor → {error.border01}), así el color
+// sigue viniendo del tema. Gana sin !important gracias al cssLayer
+// (order: 'app-styles, primeng') configurado en app.config.ts.
+:host ::ng-deep {
+  .p-inputtext.p-invalid:enabled:hover,
+  .p-inputtext.p-invalid:enabled:focus {
+    border-color: var(--p-form-field-invalid-border-color);
+  }
+}
