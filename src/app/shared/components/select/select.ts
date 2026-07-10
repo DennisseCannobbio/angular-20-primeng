@@ -3,6 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { Message, MessageSeverity, MessageVariant } from '../message/message';
 
+/** Tamaño del select (mapea a pSize de PrimeNG). */
+export type SelectSize = 'small' | 'large';
+
+/** Variante visual del select (mapea a variant de PrimeNG). */
+export type SelectVariant = 'outlined' | 'filled';
+
 @Component({
   selector: 'app-select',
   imports: [SelectModule, FormsModule, Message],
@@ -15,6 +21,18 @@ export class Select {
 
   /** Indica si el campo es obligatorio. */
   @Input() required: boolean = false;
+
+  /** Tamaño del select: 'small' | 'large' (por defecto, tamaño base). */
+  @Input() size?: SelectSize;
+
+  /** Variante visual: 'outlined' (default) | 'filled'. */
+  @Input() variant: SelectVariant = 'outlined';
+
+  /** Si es true, el select ocupa todo el ancho de su contenedor. */
+  @Input() fluid: boolean = false;
+
+  /** Muestra un spinner de carga (ej. mientras llegan datos del backend). */
+  @Input() loading: boolean = false;
 
   /** Estado de error: si es true, los bordes se pintan de rojo y se muestra el errorMessage. */
   @Input() isInvalid: boolean = false;

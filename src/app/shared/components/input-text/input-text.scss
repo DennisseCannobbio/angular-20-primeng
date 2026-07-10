@@ -26,4 +26,61 @@
   .p-inputtext.p-invalid:enabled:focus {
     border-color: var(--p-form-field-invalid-border-color);
   }
+
+  // --- Icon field (Material Symbols dentro del input) ---
+  // No usamos los selectores :first-child/:last-child de PrimeNG porque los
+  // bloques @if de Angular insertan comentarios ancla que los rompen. En su
+  // lugar posicionamos todo con la clase de lado (p-iconfield-left/right) que
+  // el componente aplica de forma fiable.
+
+  // 1) El iconfield es display:block por defecto y ocupa todo el ancho del
+  //    contenedor; lo ceñimos al input para que su borde coincida con el del
+  //    input y el ícono no quede afuera. En fluid, el input ya es 100%.
+  .p-iconfield {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    width: fit-content;
+  }
+  .p-iconfield:has(.p-inputtext-fluid) {
+    display: flex;
+    width: 100%;
+  }
+
+  // 2) Hueco en el input para el ícono, según el lado.
+  //    (2 * padding-x + tamaño del ícono ≈ 2.75rem con el padding base).
+  .p-iconfield-left .p-inputtext {
+    padding-inline-start: 2.75rem;
+  }
+  .p-iconfield-right .p-inputtext {
+    padding-inline-end: 2.75rem;
+  }
+
+  // 3) Posición del ícono dentro del campo. Absoluto respecto al iconfield,
+  //    que ahora coincide con el input.
+  .p-inputicon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 0; // anula el margin-top negativo de PrimeNG
+    pointer-events: none;
+    color: var(--p-iconfield-icon-color, var(--p-on-surface-02));
+  }
+  .p-iconfield-left .p-inputicon {
+    inset-inline-start: 0.75rem;
+    inset-inline-end: auto;
+  }
+  .p-iconfield-right .p-inputicon {
+    inset-inline-end: 0.75rem;
+    inset-inline-start: auto;
+  }
+
+  // 4) El glifo de Material Symbols centrado y con tamaño acorde.
+  .p-inputicon .material-symbols-outlined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
 }

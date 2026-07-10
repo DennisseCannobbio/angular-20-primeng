@@ -1,5 +1,5 @@
 <div class="preview">
-  <h1>Muestra del tema · Backoffice Notificaciones</h1>
+  <h1>Muestra del tema · Prime NG v20</h1>
   <p class="subtitle">
     Página de verificación visual de los colores del Figma aplicados al tema de PrimeNG.
   </p>
@@ -42,33 +42,100 @@
   <section>
     <h2>Mensajes (severity)</h2>
     <div class="col">
-      <app-message severity="success" materialIcon="check_circle">Operación realizada con éxito.</app-message>
-      <app-message severity="info" materialIcon="info">Este es un mensaje informativo.</app-message>
-      <app-message severity="warn" materialIcon="warning">Ten cuidado con esta acción.</app-message>
-      <app-message severity="error" materialIcon="error">Ocurrió un error al procesar.</app-message>    </div>
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon">{{ m.text }}</app-message>
+      }
+    </div>
+
+    <h3>Outlined (<code>variant="outlined"</code>)</h3>
+    <div class="col">
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon" variant="outlined">{{ m.text }}</app-message>
+      }
+    </div>
+
+    <h3>Simple (<code>variant="simple"</code>)</h3>
+    <div class="col">
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon" variant="simple">{{ m.text }}</app-message>
+      }
+    </div>
+
+    <h3>Small (<code>size="small"</code>)</h3>
+    <div class="col">
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon" size="small">{{ m.text }}</app-message>
+      }
+    </div>
+
+    <h3>Large + closable (<code>size="large"</code>, <code>[closable]="true"</code>)</h3>
+    <div class="col">
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon" size="large" [closable]="true">{{ m.text }}</app-message>
+      }
+    </div>
   </section>
 
   <!-- ============ Input ============ -->
   <section>
-    <h2>Input Text</h2>
-    <app-input-text label="Nombre" [label]="'Input Propio'" [isDisabled]="false" [placeholder]="'Placeholder aca'"
-      [errorMessage]="'Debes ingresar una URL de destino válida. Campo obligatorio'" [isInvalid]="true"
-      [materialIcon]="'error'" [required]="true"></app-input-text>
+    <h2>Input Text (variantes)</h2>
+    <div class="row" style="gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+      @for (v of inputVariants; track v.title) {
+      <div class="col" style="flex: 1 1 260px; min-width: 260px;">
+        <h3>{{ v.title }}</h3>
+        <app-input-text
+          [label]="v.label"
+          [placeholder]="v.placeholder ?? ''"
+          [required]="v.required ?? false"
+          [isDisabled]="v.isDisabled ?? false"
+          [isInvalid]="v.isInvalid ?? false"
+          [errorMessage]="v.errorMessage ?? ''"
+          [message]="v.message ?? ''"
+          [messageSeverity]="v.messageSeverity ?? 'info'"
+          [messageVariant]="v.messageVariant ?? 'simple'"
+          [materialIcon]="v.materialIcon ?? ''"
+          [size]="v.size"
+          [variant]="v.variant ?? 'outlined'"
+          [fluid]="v.fluid ?? false"
+          [fieldIcon]="v.fieldIcon ?? ''"
+          [fieldIconPosition]="v.fieldIconPosition ?? 'left'">
+        </app-input-text>
+      </div>
+      }
+    </div>
   </section>
 
   <!-- ============ Select ============ -->
   <section>
-    <h2>Select</h2>
-    <div class="row" style="gap: 2rem; align-items: flex-start;">
-      <div class="col" style="flex: 1;">
-        <h3>Normal (con validación)</h3>
-        <app-select label="Opciones" [options]="selectOptions" placeholder="Selecciona una opción" optionLabel="label"
-          optionValue="value" [isInvalid]="true" [required]="true" errorMessage="Debes seleccionar una opción válida."
-          materialIcon="error">
+    <h2>Select (variantes)</h2>
+    <div class="row" style="gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+      @for (v of selectVariants; track v.title) {
+      <div class="col" style="flex: 1 1 260px; min-width: 260px;">
+        <h3>{{ v.title }}</h3>
+        <app-select
+          [label]="v.label"
+          [options]="selectOptions"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Selecciona una opción"
+          [size]="v.size"
+          [variant]="v.variant ?? 'outlined'"
+          [fluid]="v.fluid ?? false"
+          [loading]="v.loading ?? false"
+          [filter]="false"
+          [showClear]="v.showClear ?? false"
+          [isDisabled]="v.isDisabled ?? false"
+          [isInvalid]="v.isInvalid ?? false"
+          [required]="v.required ?? false"
+          [errorMessage]="v.errorMessage ?? ''"
+          [message]="v.message ?? ''"
+          [messageSeverity]="v.messageSeverity ?? 'info'"
+          [materialIcon]="v.materialIcon ?? ''">
         </app-select>
       </div>
+      }
 
-      <div class="col" style="flex: 1;">
+      <div class="col" style="flex: 1 1 260px; min-width: 260px;">
         <h3>Virtual Scroll (10,000 ítems)</h3>
         <app-select label="Data masiva" [options]="virtualScrollOptions" [required]="false"
           placeholder="Busca y scrollea..." optionLabel="label" optionValue="value" [virtualScroll]="true">
