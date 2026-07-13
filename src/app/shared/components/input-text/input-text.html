@@ -18,10 +18,12 @@
       <input
         type="text"
         pInputText
+        [ngModel]="value"
+        (ngModelChange)="onModelChange($event)"
         [pSize]="$any(size)"
         [variant]="variant"
         [fluid]="fluid"
-        [disabled]="isDisabled"
+        [disabled]="disabled"
         [invalid]="isInvalid"
         [placeholder]="placeholder"
       />
@@ -33,10 +35,12 @@
     <input
       type="text"
       pInputText
+      [ngModel]="value"
+      (ngModelChange)="onModelChange($event)"
       [pSize]="$any(size)"
       [variant]="variant"
       [fluid]="fluid"
-      [disabled]="isDisabled"
+      [disabled]="disabled"
       [invalid]="isInvalid"
       [placeholder]="placeholder"
     />

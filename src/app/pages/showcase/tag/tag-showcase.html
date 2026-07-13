@@ -1,0 +1,12 @@
+<div class="preview">
+  <h1>Tag</h1>
+  <p class="subtitle">Tags de PrimeNG por severidad.</p>
+
+  <section>
+    <div class="row">
+      @for (s of tagSeverities; track s.label) {
+      <p-tag [value]="s.label" [severity]="s.severity" />
+      }
+    </div>
+  </section>
+</div>

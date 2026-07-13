@@ -1,0 +1,135 @@
+<div class="preview">
+  <h1>Theme · Design tokens</h1>
+  <p class="subtitle">
+    Tipografía, dimensiones y foundations del tema (colores del Figma aplicados a PrimeNG).
+  </p>
+
+  <!-- ============ Tipografía ============ -->
+  <section>
+    <h2>Tipografía (fuente Overpass + escala del Figma)</h2>
+    <p class="subtitle">
+      Todo usa <code>var(--bs-*)</code>. La familia y el tamaño base se heredan del
+      <code>body</code>; PrimeNG hereda de ahí también.
+    </p>
+
+    <h3>Escala de tamaños</h3>
+    <div class="type-scale">
+      @for (t of typeScale; track t.token) {
+      <div class="type-row">
+        <code class="type-row__meta">font-size/{{ t.token }} · {{ t.px }}px</code>
+        <span class="type-row__sample" [style.font-size]="'var(' + t.var + ')'">
+          Notificaciones
+        </span>
+      </div>
+      }
+    </div>
+
+    <h3>Pesos</h3>
+    <div class="type-samples">
+      @for (w of typeWeights; track w.label) {
+      <div class="type-sample">
+        <code class="type-row__meta">{{ w.label }}</code>
+        <span class="type-sample__text" [style.font-weight]="'var(' + w.var + ')'">Overpass — El veloz murciélago hindú
+          comía feliz.</span>
+      </div>
+      }
+    </div>
+
+    <h3>Cursiva</h3>
+    <div class="type-samples">
+      <div class="type-sample">
+        <code class="type-row__meta">italic</code>
+        <span class="type-sample__text" style="font-style: italic">Overpass en cursiva — texto de ejemplo con acentos:
+          ñ, á, é, €.</span>
+      </div>
+    </div>
+
+    <h3>Interlineado</h3>
+    <div class="type-lh">
+      @for (lh of typeLineHeights; track lh.label) {
+      <div class="type-lh__block">
+        <code class="type-row__meta">{{ lh.label }}</code>
+        <p class="type-lh__text" [style.line-height]="'var(' + lh.var + ')'">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+          venenatis euismod aliquet nunc malesuada. Lacus condimentum fames eu
+          convallis integer justo sed.
+        </p>
+      </div>
+      }
+    </div>
+
+    <h3>Longitud de línea legible (<code>--bs-measure</code>, 45–75 caracteres)</h3>
+    <p class="type-measure">
+      El ancho ideal de una línea de texto se encuentra entre los 45 y los 75
+      caracteres, incluyendo espacios. Este bloque está limitado con
+      <code>max-width: var(--bs-measure)</code> para mantener la lectura cómoda.
+    </p>
+  </section>
+
+  <!-- ============ Escalas de dimensión ============ -->
+  <section>
+    <h2>Dimensiones (border, spacing, sizing)</h2>
+    <p class="subtitle">
+      Estas escalas las genera el preset. Se usan directo con
+      <code>var(--p-...)</code>, sin variables <code>--bs-*</code> extra.
+    </p>
+
+    <h3>radius-border (<code>--p-radius-border-*</code>)</h3>
+    <div class="dim-grid">
+      @for (r of radiusScale; track r.token) {
+      <div class="dim-cell">
+        <div class="dim-radius" [style.border-radius]="'var(' + r.var + ')'"></div>
+        <code class="dim-cell__label">{{ r.token }} · {{ r.px }}px</code>
+      </div>
+      }
+    </div>
+
+    <h3>spacing (<code>--p-spacing-*</code>)</h3>
+    <div class="dim-list">
+      @for (s of spacingScale; track s.token) {
+      <div class="dim-bar-row">
+        <code class="dim-bar-row__meta">{{ s.token }} · {{ s.px }}px</code>
+        <div class="dim-bar" [style.width]="'var(' + s.var + ')'"></div>
+      </div>
+      }
+    </div>
+
+    <h3>sizing (<code>--p-sizing-*</code>)</h3>
+    <div class="dim-list">
+      @for (s of sizingScale; track s.token) {
+      <div class="dim-bar-row">
+        <code class="dim-bar-row__meta">{{ s.token }} · {{ s.px }}px</code>
+        <div class="dim-bar dim-bar--sizing" [style.width]="'var(' + s.var + ')'"></div>
+      </div>
+      }
+    </div>
+
+    <h3>sizing-border (<code>--p-sizing-border-*</code>)</h3>
+    <div class="dim-list">
+      @for (b of sizingBorderScale; track b.token) {
+      <div class="dim-bar-row">
+        <code class="dim-bar-row__meta">{{ b.token }} · {{ b.px }}px</code>
+        <div class="dim-border-sample" [style.border-top-width]="'var(' + b.var + ')'"></div>
+      </div>
+      }
+    </div>
+  </section>
+
+  <!-- ============ Swatches de foundations ============ -->
+  <section>
+    <h2>Foundations (variables CSS del preset)</h2>
+    <p class="subtitle">Cada recuadro pinta directamente su <code>var(--p-...)</code>.</p>
+
+    @for (group of foundationGroups; track group.name) {
+    <h3>color/{{ group.name }}</h3>
+    <div class="swatches">
+      @for (v of group.vars; track v) {
+      <div class="swatch">
+        <div class="swatch__color" [style.background]="'var(' + v + ')'"></div>
+        <code class="swatch__label">{{ v }}</code>
+      </div>
+      }
+    </div>
+    }
+  </section>
+</div>

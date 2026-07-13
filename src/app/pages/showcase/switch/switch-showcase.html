@@ -1,0 +1,29 @@
+<div class="preview">
+  <h1>Switch</h1>
+  <p class="subtitle">Componente <code>app-switch</code> y todas sus variantes.</p>
+
+  <section>
+    <div class="row" style="gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+      @for (v of switchVariants; track v.title) {
+      <div class="col" style="flex: 1 1 260px; min-width: 260px;">
+        <h3>{{ v.title }}</h3>
+        <app-switch
+          [label]="v.label"
+          [(ngModel)]="switchValues[v.title]"
+          [labelPosition]="v.labelPosition ?? 'side'"
+          [size]="v.size"
+          [required]="v.required ?? false"
+          [readonly]="v.readonly ?? false"
+          [isDisabled]="v.isDisabled ?? false"
+          [isInvalid]="v.isInvalid ?? false"
+          [errorMessage]="v.errorMessage ?? ''"
+          [message]="v.message ?? ''"
+          [messageSeverity]="v.messageSeverity ?? 'info'"
+          [messageVariant]="v.messageVariant ?? 'simple'"
+          [materialIcon]="v.materialIcon ?? ''">
+        </app-switch>
+      </div>
+      }
+    </div>
+  </section>
+</div>

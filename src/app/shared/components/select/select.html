@@ -8,7 +8,8 @@
     </label>
   }
   <p-select [options]="options"
-      [(ngModel)]="value"
+      [ngModel]="value"
+      (ngModelChange)="onModelChange($event)"
       [size]="size"
       [variant]="variant"
       [fluid]="fluid"
@@ -25,7 +26,7 @@
       [emptyMessage]="emptyMessage"
       [emptyFilterMessage]="emptyFilterMessage"
       [showClear]="showClear"
-      [disabled]="isDisabled"
+      [disabled]="disabled"
       [invalid]="isInvalid"
       [placeholder]="placeholder">
     <!-- Spinner de carga con Material Symbols (PrimeIcons no está en el
