@@ -1,0 +1,58 @@
+<div class="tabla-dinamica-wrapper">
+
+    <p-table [value]="data" [columns]="columns" [scrollable]="true" responsiveLayout="scroll">
+
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                @for (col of columns; track col.field) {
+                <th [pSortableColumn]="col.field">
+                    {{ col.header }}
+                </th>
+                }
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                @for (col of columns; track col.field) {
+                <td>
+                    @switch (col.type) {
+
+                    @case ('text') {
+                    <span class="cell-text" [title]="rowData[col.field]">{{ rowData[col.field] }}</span>
+                    }
+
+                    @case ('date') {
+                    <span class="cell-text">{{ rowData[col.field] | date: (col.dateFormat || 'dd/MM/yyyy') }}</span>
+                    }
+
+                    @case ('time') {
+                    <span class="cell-text">{{ rowData[col.field] | date: (col.dateFormat || 'HH:mm') }} Hrs.</span>
+                    }
+
+                    @case ('badge') {
+                    <p-tag [value]="rowData[col.field]" [severity]="getSeverity(rowData[col.field])">
+                    </p-tag>
+                    }
+
+                    @case ('action') {
+                    <p-button [label]="col.actionLabel || 'VER DETALLE'" [text]="true" size="small"
+                        (onClick)="accionClic.emit(rowData)">
+                    </p-button>
+                    }
+                    }
+                </td>
+                }
+            </tr>
+        </ng-template>
+    </p-table>
+
+    @if (meta) {
+    <div class="paginador-contenedor">
+        <app-paginacion-tabla [totalRegistros]="meta.totalRegistros" [filas]="meta.registrosPorPagina"
+            [primerRegistro]="(meta.paginaActual - 1) * meta.registrosPorPagina"
+            (cambioDePagina)="cambioPagina.emit($event)">
+        </app-paginacion-tabla>
+    </div>
+    }
+</div>

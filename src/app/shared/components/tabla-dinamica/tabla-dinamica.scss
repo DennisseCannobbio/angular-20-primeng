@@ -1,0 +1,62 @@
+.tabla-dinamica-wrapper {
+    background-color: var(--p-surface-01);
+    border-radius: var(--p-radius-border-02);
+
+    ::ng-deep .p-datatable {
+
+        table {
+            min-width: 800px;
+        }
+
+        .p-datatable-thead>tr>th {
+            white-space: nowrap;
+            background: transparent;
+            color: var(--p-on-surface-02);
+            font-weight: var(--bs-font-weight-bold);
+            font-size: var(--bs-font-size-neg-1);
+            border: none;
+            border-bottom: 2px solid var(--p-border-01);
+            padding: 0.5rem 1rem;
+        }
+
+        .p-datatable-tbody>tr {
+            background: transparent;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: var(--p-surface-02);
+            }
+
+            >td {
+                border: none;
+                border-bottom: 1px solid var(--p-border-01);
+                padding: 0.5rem 1rem;
+            }
+        }
+    }
+
+    .cell-text {
+        font-size: var(--bs-font-size-neg-1);
+        color: var(--p-on-surface-01);
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 250px;
+    }
+
+    ::ng-deep .p-tag {
+        padding: var(--p-spacing-00) var(--p-spacing-02);
+        font-size: var(--bs-font-size-neg-2);
+    }
+
+    ::ng-deep .p-button.p-button-text {
+        font-weight: var(--bs-font-weight-bold);
+        padding: 0;
+    }
+
+    .paginador-contenedor {
+        padding: 0 1rem;
+        margin-top: 0.5rem;
+    }
+}

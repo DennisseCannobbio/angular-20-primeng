@@ -1,0 +1,131 @@
+.paginador-personalizado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    width: 100%;
+    font-family: var(--bs-font-family-base);
+    margin-top: 1rem;
+
+    .navegacion-paginador {
+        display: flex;
+        align-items: center;
+        gap: var(--p-spacing-01, 4px);
+
+        .boton-nav,
+        .enlace-pagina {
+            background: transparent;
+            border: none;
+            min-width: 32px;
+            height: 32px;
+            border-radius: var(--p-radius-border-circle, 50%);
+            cursor: pointer;
+            color: var(--p-on-surface-01);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: var(--bs-font-size-neg-1);
+            font-family: var(--bs-font-family-base);
+
+            .material-icons {
+                font-family: 'Material Symbols Outlined', 'Material Icons';
+                font-weight: normal;
+                font-style: normal;
+                font-size: var(--bs-font-size-03);
+                line-height: 1;
+                letter-spacing: normal;
+                text-transform: none;
+                display: inline-block;
+                white-space: nowrap;
+                word-wrap: normal;
+                direction: ltr;
+                -webkit-font-smoothing: antialiased;
+                color: var(--p-accent-01);
+            }
+
+            &:disabled {
+                cursor: not-allowed;
+                opacity: 1;
+                background-color: transparent;
+
+                .material-icons {
+                    color: var(--p-disabled-01);
+                }
+            }
+
+            &:hover:not(.activo):not(:disabled) {
+                background-color: var(--p-surface-02);
+            }
+        }
+
+        .enlaces-pagina {
+            display: flex;
+            align-items: center;
+        }
+
+        .enlace-pagina.activo {
+            background-color: var(--p-accent-container-01, #E3F2FD) !important;
+            color: var(--p-accent-01, #006FB9) !important;
+            font-weight: var(--bs-font-weight-bold, 700);
+
+            /* Forzamos el círculo perfecto */
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50% !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ellipsis {
+            color: var(--p-on-surface-01);
+            padding: 0 var(--p-spacing-01, 4px);
+            font-size: var(--bs-font-size-neg-1);
+            letter-spacing: 1px;
+        }
+    }
+
+    .controles-paginador {
+        display: flex;
+        align-items: center;
+        gap: var(--p-spacing-04, 16px);
+        color: var(--p-on-surface-01);
+
+        .etiqueta-rpp {
+            font-family: var(--bs-font-family-base);
+            color: var(--p-on-surface-01);
+            font-size: var(--bs-font-size-neg-1);
+        }
+
+        .selector-personalizado {
+            border: 1px solid var(--p-border-01);
+            border-radius: var(--p-radius-border-01, 4px);
+            height: 32px;
+            padding: 0 24px 0 12px;
+            color: var(--p-on-surface-01);
+            background-color: var(--p-surface-01);
+            cursor: pointer;
+            outline: none;
+            font-family: var(--bs-font-family-base);
+            font-size: var(--bs-font-size-neg-2);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23006FB9%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20class%3D%22feather%20feather-chevron-down%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 4px center;
+            background-size: 16px;
+            min-width: 60px;
+
+            &:focus {
+                border-color: var(--p-accent-01);
+            }
+        }
+
+        .texto-rango {
+            font-family: var(--bs-font-family-base);
+            color: var(--p-on-surface-02);
+            font-size: var(--bs-font-size-neg-1);
+        }
+    }
+}

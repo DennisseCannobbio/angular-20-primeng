@@ -1,0 +1,42 @@
+<div class="paginador-personalizado">
+    <div class="navegacion-paginador">
+        <button (click)="cambiarPagina(0)" [disabled]="paginaActual === 0" class="boton-nav" title="Primera página">
+            <span class="material-icons">keyboard_double_arrow_left</span>
+        </button>
+        <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 0" class="boton-nav"
+            title="Página anterior">
+            <span class="material-icons">chevron_left</span>
+        </button>
+
+        <div class="enlaces-pagina">
+            @for (pagina of paginasVisibles; track $index) {
+            @if (pagina !== -1) {
+            <button (click)="cambiarPagina(pagina)" [class.activo]="paginaActual === pagina" class="enlace-pagina">
+                {{ pagina + 1 }}
+            </button>
+            } @else {
+            <span class="ellipsis">...</span>
+            }
+            }
+        </div>
+
+        <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === cantidadPaginas - 1"
+            class="boton-nav" title="Página siguiente">
+            <span class="material-icons">chevron_right</span>
+        </button>
+        <button (click)="cambiarPagina(cantidadPaginas - 1)" [disabled]="paginaActual === cantidadPaginas - 1"
+            class="boton-nav" title="Última página">
+            <span class="material-icons">keyboard_double_arrow_right</span>
+        </button>
+    </div>
+
+    <div class="controles-paginador">
+        <span class="etiqueta-rpp">Resultados por página</span>
+        <select class="selector-personalizado" (change)="cambiarFilas($event)" [value]="filas">
+            @for (opcion of opcionesFilasPorPagina; track opcion) {
+            <option [value]="opcion">{{ opcion }}</option>
+            }
+        </select>
+        <span class="texto-rango">{{ etiquetaRango }}</span>
+    </div>
+</div>

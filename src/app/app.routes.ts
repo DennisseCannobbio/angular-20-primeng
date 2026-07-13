@@ -53,6 +53,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/showcase/theme/theme-showcase').then(m => m.ThemeShowcase),
       },
+      {
+        path: 'table',
+        loadComponent: () =>
+          import('./pages/showcase/table/table-showcase').then(m => m.TableShowcase),
+      },
     ],
   },
   {
