@@ -1,5 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 
@@ -11,6 +12,9 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
+    // Requerido por p-fileUpload, que inyecta HttpClient para subir archivos
+    // (aunque el componente app-file no lo use, PrimeNG lo pide en su constructor).
+    provideHttpClient(),
     // Requerido por componentes de PrimeNG con animaciones (p. ej. p-message).
     // Sin esto se lanza NG05105 (@messageAnimation) y aborta el render.
     provideAnimationsAsync(),

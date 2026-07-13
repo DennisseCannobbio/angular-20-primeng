@@ -38,6 +38,12 @@ export class Sandbox {
       icon: 'toggle_on',
     },
     {
+      title: 'File',
+      description: 'Carga de archivos con selección múltiple, límites y estados.',
+      route: '/showcase/file',
+      icon: 'upload_file',
+    },
+    {
       title: 'Message',
       description: 'Mensajes por severidad, variante y tamaño.',
       route: '/showcase/message',

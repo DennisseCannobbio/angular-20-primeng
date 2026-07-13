@@ -44,6 +44,29 @@
         [errorMessage]="errorMessage('rol')"
       />
 
+      <app-file
+        label="Imagen lateral"
+        formControlName="imagen_perfil"
+        [required]="true"
+        [isInvalid]="showError('imagen_perfil')"
+        [errorMessage]="errorMessage('imagen_perfil')"
+        accept="image/jpeg, image/png"
+        [maxFileSize]="1000000"
+        hint="Formatos aceptados: jpg y png"
+      />
+
+      <app-file
+        label="Documentos adjuntos"
+        formControlName="documento"
+        [required]="true"
+        [isInvalid]="showError('documento')"
+        [errorMessage]="errorMessage('documento')"
+        [multiple]="true"
+        accept=".pdf,.doc,.docx"
+        [maxFileSize]="1000000"
+        hint="Puedes subir uno o más documentos (PDF, DOC, máx 1MB)"
+      />
+
       <app-switch
         label="Acepto los términos y condiciones"
         formControlName="aceptaTerminos"

@@ -487,5 +487,31 @@ export const BrandPreset = definePreset(Aura, {
         }
       },
     },
+    // FileUpload: solo tokens estructurales que PrimeNG expone. La maqueta del
+    // Figma (zona clicable, lista, preview, estado, acciones) es markup propio y
+    // se estiliza en shared/components/file/file.scss con las mismas variables.
+    fileupload: {
+      root: {
+        // El borde punteado se aplica en el SCSS (no hay token para border-style);
+        // aquí fijamos radio del tema y quitamos el fondo para dejar solo el trazo.
+        background: 'transparent',
+        borderColor: '{border.02}', // Figma neutral/70 (borde de la zona)
+        borderRadius: '{radiusBorder.02}', // 8px — Figma radius-border/02
+        color: '{on.surface.02}',
+      },
+      content: {
+        padding: '{spacing.00}', // el padding real lo maneja la maqueta
+        gap: '{spacing.02}', // 8px entre archivos
+        highlightBorderColor: '{accent.border01}', // borde al arrastrar (azul)
+      },
+      file: {
+        padding: '{spacing.02}', // 8px — padding vertical de cada fila
+        gap: '{spacing.03}', // 12px — separación preview/info/acciones
+        borderColor: '{border.01}', // separador entre archivos
+      },
+      fileList: {
+        gap: '{spacing.02}', // 8px
+      },
+    },
   },
 });

@@ -1,0 +1,78 @@
+<div class="input-container app-file" [class.app-file--invalid]="effectiveIsInvalid" [class.app-file--disabled]="disabled" [class.app-file--has-buttons]="false">
+  @if (label) {
+    <label class="label">
+      {{ label }}
+      @if (required) {
+        <span class="required-asterisk">*</span>
+      }
+    </label>
+  }
+
+  <p-fileupload
+    #fileUpload
+    mode="advanced"
+    [multiple]="multiple"
+    [disabled]="disabled"
+    [customUpload]="true"
+    [showUploadButton]="false"
+    [showCancelButton]="false"
+    (onSelect)="onFileSelect($event)">
+    
+    <ng-template pTemplate="header" let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback">
+       <button type="button" class="app-file-trigger" (click)="chooseCallback()" [disabled]="disabled">
+          <span class="material-symbols-outlined app-file-trigger-icon">cloud_upload</span>
+          <span>ARRASTRA O CARGA {{ dropzoneText }}</span>
+       </button>
+    </ng-template>
+
+    <ng-template pTemplate="content" let-files let-removeFileCallback="removeFileCallback">
+       @if (files?.length) {
+         <ul class="app-file-list">
+           @for (f of files; track f.name; let i = $index) {
+             <li class="app-file-item" [class.app-file-item--error]="isItemInvalid(f)">
+               <div class="app-file-thumb" [class.app-file-thumb--error]="isItemInvalid(f)">
+                 @if (isItemInvalid(f)) {
+                   <span class="material-symbols-outlined app-file-thumb-error-icon">error</span>
+                 } @else if (isImage(f)) {
+                   <img [src]="f.objectURL || ''" class="app-file-thumb-img" alt="preview" />
+                 } @else {
+                   <span class="material-symbols-outlined app-file-thumb-icon">description</span>
+                   <span class="app-file-thumb-ext">{{ getExtension(f.name) }}</span>
+                 }
+               </div>
+               <div class="app-file-info">
+                 <span class="app-file-name">{{ f.name }}</span>
+                 <span class="app-file-meta" [style.color]="isItemInvalid(f) ? 'var(--p-error-01)' : ''">
+                   {{ formatSize(f.size) }}
+                   @if (!isItemInvalid(f)) {
+                     <span class="material-symbols-outlined app-file-status app-file-status--success">check_circle</span>
+                   }
+                 </span>
+               </div>
+               <div class="app-file-actions">
+                  <button type="button" class="app-file-action app-file-action--download" (click)="downloadFile(f)" [disabled]="disabled" title="Descargar">
+                    <span class="material-symbols-outlined">download</span>
+                  </button>
+                  <button type="button" class="app-file-action app-file-action--remove" (click)="onRemoveItem($event, i, removeFileCallback)" [disabled]="disabled" title="Eliminar">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+               </div>
+             </li>
+           }
+         </ul>
+       }
+    </ng-template>
+  </p-fileupload>
+
+  @if (isMessageVisible) {
+    <app-message
+      [text]="displayMessage"
+      [severity]="displaySeverity"
+      [variant]="messageVariant"
+      [materialIcon]="materialIcon"
+      size="small"
+    />
+  } @else if (hint) {
+    <div class="app-file-hint">{{ hint }}</div>
+  }
+</div>

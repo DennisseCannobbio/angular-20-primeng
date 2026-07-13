@@ -1,0 +1,252 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: var(--bs-font-size-neg-1); // 14px — escala del Figma
+  line-height: var(--bs-line-height-title); // 125% (texto corto)
+  color: var(--p-on-surface-01);
+
+  .required-asterisk {
+    color: var(--p-error-01);
+    margin-left: 0.125rem;
+  }
+}
+
+// Texto de ayuda bajo la zona (ej. "Formatos aceptados: jpg y png").
+.app-file-hint {
+  font-size: var(--bs-font-size-neg-1);
+  line-height: var(--bs-line-height-title);
+  color: var(--p-on-surface-01);
+}
+
+:host ::ng-deep {
+  // ---- Zona (dropzone) ----
+  // El fondo, color de borde y radio vienen del preset (components.fileupload).
+  // Aquí solo forzamos el estilo punteado, que no tiene token en PrimeNG.
+  .app-file .p-fileupload-advanced {
+    border-style: dashed;
+  }
+
+  // El header por defecto de PrimeNG aloja nuestra zona clicable; sin fondo,
+  // bordes ni padding propios (los pone la maqueta).
+  .app-file .p-fileupload-header {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    display: block;
+  }
+
+  // Con showButtons, PrimeNG añade sus botones Elegir/Limpiar tras el header.
+  .app-file--has-buttons .p-fileupload-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--p-spacing-02);
+    padding-block-end: var(--p-spacing-03);
+  }
+
+  .app-file .p-fileupload-content {
+    background: transparent;
+    border: 0;
+  }
+
+  // ---- Botón que ocupa toda la zona superior (clicable) ----
+  .app-file-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--p-spacing-02); // 8px
+    width: 100%;
+    padding: var(--p-spacing-04); // 16px
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: var(--p-accent-01); // azul de acento del Figma
+    font-size: var(--bs-font-size-neg-1);
+    font-weight: var(--bs-font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+
+    &:disabled {
+      cursor: not-allowed;
+      color: var(--p-disabled-01);
+    }
+  }
+
+  .app-file-trigger-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  // ---- Lista de archivos ----
+  .app-file-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 var(--p-spacing-04) var(--p-spacing-03); // alinea con el trigger
+    display: flex;
+    flex-direction: column;
+    gap: var(--p-spacing-02);
+  }
+
+  .app-file-item {
+    display: flex;
+    align-items: center;
+    gap: var(--p-spacing-03); // 12px
+    padding: var(--p-spacing-02) 0;
+  }
+
+  // Fila en error: línea inferior roja (como el Figma).
+  .app-file-item--error {
+    border-bottom: 2px solid var(--p-error-border01);
+    padding-bottom: var(--p-spacing-03);
+  }
+
+  // ---- Miniatura / preview ----
+  .app-file-thumb {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--p-radius-border-01); // 4px
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; // ícono de tipo arriba, extensión abajo
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+    background: var(--p-container-02);
+  }
+
+  .app-file-thumb--error {
+    background: var(--p-error-container01); // rosado suave
+  }
+
+  .app-file-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  // Ícono del tipo de archivo (PDF, Word, Excel, CSV…) cuando no es imagen.
+  .app-file-thumb-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--p-on-surface-01);
+  }
+
+  // Extensión (PDF, CSV…) bajo el ícono, cuando no hay preview de imagen.
+  .app-file-thumb-ext {
+    font-size: 0.625rem;
+    font-weight: var(--bs-font-weight-bold);
+    color: var(--p-on-surface-02);
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .app-file-thumb-error-icon {
+    font-size: 1.5rem;
+    color: var(--p-error-01);
+  }
+
+  // ---- Info (nombre + tamaño + estado) ----
+  .app-file-info {
+    flex: 1 1 auto;
+    min-width: 0; // permite truncar el nombre
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .app-file-name {
+    font-size: var(--bs-font-size-neg-1);
+    color: var(--p-on-surface-02);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .app-file-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--p-spacing-01); // 4px
+    font-size: var(--bs-font-size-neg-1);
+    color: var(--p-on-surface-01);
+  }
+
+  // Indicador de estado junto al tamaño.
+  .app-file-status {
+    font-size: 1.125rem;
+    line-height: 1;
+
+    &--success {
+      color: var(--p-success-01);
+    }
+
+    &--loading {
+      color: var(--p-on-surface-01);
+      animation: app-file-spin 1s linear infinite;
+    }
+  }
+
+  // ---- Acciones (descargar / borrar) ----
+  .app-file-actions {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--p-spacing-02);
+  }
+
+  .app-file-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 0;
+    border-radius: var(--p-radius-border-circle);
+    cursor: pointer;
+    background: transparent;
+    transition: background-color 0.15s;
+
+    .material-symbols-outlined {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    &:hover {
+      background: var(--p-container-02);
+    }
+  }
+
+  // Descargar: fondo azul suave como el Figma; al hover, azul más marcado.
+  .app-file-action--download {
+    background: var(--p-container-05); // azul muy claro
+    color: var(--p-accent-01);
+
+    &:hover {
+      background: var(--p-accent-container01); // azul de acento (más oscuro)
+      color: var(--p-accent-on-accent01); // texto/ícono legible sobre el acento
+    }
+  }
+
+  // Borrar: fondo rojo suave (como el download), ícono rojo.
+  .app-file-action--remove {
+    background: var(--p-error-container01); // rojo muy claro
+    color: var(--p-error-01);
+
+    &:hover {
+      background: var(--p-error-container02); // rojo un punto más oscuro
+    }
+  }
+
+  // ---- Estado inválido global (borde de la zona) ----
+  .app-file--invalid .p-fileupload-advanced {
+    border-color: var(--p-error-border01);
+  }
+}
+
+@keyframes app-file-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

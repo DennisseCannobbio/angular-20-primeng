@@ -29,6 +29,11 @@ export const routes: Routes = [
           import('./pages/showcase/switch/switch-showcase').then(m => m.SwitchShowcase),
       },
       {
+        path: 'file',
+        loadComponent: () =>
+          import('./pages/showcase/file/file-showcase').then(m => m.FileShowcase),
+      },
+      {
         path: 'message',
         loadComponent: () =>
           import('./pages/showcase/message/message-showcase').then(m => m.MessageShowcase),
