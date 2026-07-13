@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { Message, MessageSeverity, MessageVariant } from '../message/message';
 
@@ -14,8 +14,15 @@ export type SelectVariant = 'outlined' | 'filled';
   imports: [SelectModule, FormsModule, Message],
   templateUrl: './select.html',
   styleUrl: './select.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => Select),
+      multi: true,
+    },
+  ],
 })
-export class Select {
+export class Select implements ControlValueAccessor {
   /** Etiqueta (label) que se muestra arriba del selector. */
   @Input() label = '';
 
@@ -39,6 +46,14 @@ export class Select {
 
   /** Si es true, el selector se deshabilita y no permite interacción. */
   @Input() isDisabled: boolean = false;
+
+  /** Deshabilitado por el formulario reactivo (setDisabledState). */
+  disabledByForm: boolean = false;
+
+  /** El control está deshabilitado si lo indica el @Input() o el formulario. */
+  get disabled(): boolean {
+    return this.isDisabled || this.disabledByForm;
+  }
 
   /** Arreglo de opciones a mostrar en el menú desplegable. */
   @Input() options: any[] = [];
@@ -82,8 +97,40 @@ export class Select {
   /** Elemento base donde se dibuja el menú (por defecto al 'body' para evitar recortes). */
   @Input() appendTo: string = 'body';
 
-  /** Valor actual seleccionado (doble binding interno con ngModel). */
-  @Input() value: any;
+  /**
+   * Valor actual seleccionado. Es el estado interno enlazado con el
+   * ControlValueAccessor: lo escribe el formulario (writeValue) y lo emite
+   * el usuario al elegir una opción (onModelChange).
+   */
+  value: any;
+
+  /** Callbacks registrados por Angular Forms. */
+  private onChange: (value: any) => void = () => {};
+  private onTouched: () => void = () => {};
+
+  /** Angular Forms → escribe el valor en el control. */
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn: (value: any) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabledByForm = isDisabled;
+  }
+
+  /** El usuario cambió la selección: propaga el valor al formulario. */
+  onModelChange(value: any): void {
+    this.value = value;
+    this.onChange(value);
+    this.onTouched();
+  }
 
   /** Mensaje de error (tiene prioridad y se muestra cuando el select es inválido). */
   @Input() errorMessage: string = '';

@@ -1,0 +1,26 @@
+<div class="preview">
+  <h1>Button</h1>
+  <p class="subtitle">Botones de PrimeNG por severidad y estilo.</p>
+
+  <section>
+    <div class="row">
+      @for (s of severities; track s.label) {
+      <p-button [label]="s.label" [severity]="s.severity" />
+      }
+    </div>
+
+    <h3>Outlined</h3>
+    <div class="row">
+      @for (s of severities; track s.label) {
+      <p-button [label]="s.label" [severity]="s.severity" [outlined]="true" />
+      }
+    </div>
+
+    <h3>Text</h3>
+    <div class="row">
+      @for (s of severities; track s.label) {
+      <p-button [label]="s.label" [severity]="s.severity" [text]="true" />
+      }
+    </div>
+  </section>
+</div>

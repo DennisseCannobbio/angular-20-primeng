@@ -1,0 +1,40 @@
+<div class="preview">
+  <h1>Message</h1>
+  <p class="subtitle">Componente <code>app-message</code> por severidad, variante y tamaño.</p>
+
+  <section>
+    <div class="col">
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon">{{ m.text }}</app-message>
+      }
+    </div>
+
+    <h3>Outlined (<code>variant="outlined"</code>)</h3>
+    <div class="col">
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon" variant="outlined">{{ m.text }}</app-message>
+      }
+    </div>
+
+    <h3>Simple (<code>variant="simple"</code>)</h3>
+    <div class="col">
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon" variant="simple">{{ m.text }}</app-message>
+      }
+    </div>
+
+    <h3>Small (<code>size="small"</code>)</h3>
+    <div class="col">
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon" size="small">{{ m.text }}</app-message>
+      }
+    </div>
+
+    <h3>Large + closable (<code>size="large"</code>, <code>[closable]="true"</code>)</h3>
+    <div class="col">
+      @for (m of messages; track m.severity) {
+      <app-message [severity]="m.severity" [materialIcon]="m.materialIcon" size="large" [closable]="true">{{ m.text }}</app-message>
+      }
+    </div>
+  </section>
+</div>

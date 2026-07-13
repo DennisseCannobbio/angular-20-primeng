@@ -1,0 +1,31 @@
+<div class="preview">
+  <h1>Input Text</h1>
+  <p class="subtitle">Componente <code>app-input-text</code> y todas sus variantes.</p>
+
+  <section>
+    <div class="row" style="gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+      @for (v of inputVariants; track v.title) {
+      <div class="col" style="flex: 1 1 260px; min-width: 260px;">
+        <h3>{{ v.title }}</h3>
+        <app-input-text
+          [label]="v.label"
+          [placeholder]="v.placeholder ?? ''"
+          [required]="v.required ?? false"
+          [isDisabled]="v.isDisabled ?? false"
+          [isInvalid]="v.isInvalid ?? false"
+          [errorMessage]="v.errorMessage ?? ''"
+          [message]="v.message ?? ''"
+          [messageSeverity]="v.messageSeverity ?? 'info'"
+          [messageVariant]="v.messageVariant ?? 'simple'"
+          [materialIcon]="v.materialIcon ?? ''"
+          [size]="v.size"
+          [variant]="v.variant ?? 'outlined'"
+          [fluid]="v.fluid ?? false"
+          [fieldIcon]="v.fieldIcon ?? ''"
+          [fieldIconPosition]="v.fieldIconPosition ?? 'left'">
+        </app-input-text>
+      </div>
+      }
+    </div>
+  </section>
+</div>

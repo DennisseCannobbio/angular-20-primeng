@@ -1,0 +1,59 @@
+// Estilos compartidos por todas las páginas de showcase. Cada página los
+// importa con `@use '../showcase' as showcase;` o `@import`. Contiene el
+// contenedor .preview, los encabezados y los helpers de layout (.row/.col).
+
+:host {
+  display: block;
+  background: var(--p-surface-01);
+  color: var(--p-on-surface-01);
+  min-height: 100vh;
+}
+
+.preview {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  // Usar la fuente del tema (Overpass), heredada del body.
+  font-family: var(--bs-font-family-base);
+}
+
+h1 {
+  margin: 0 0 0.25rem;
+  color: var(--p-on-surface-02);
+}
+
+.subtitle {
+  margin: 0 0 1.5rem;
+  color: var(--p-on-surface-01);
+}
+
+section {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--p-border-01);
+}
+
+h2 {
+  margin: 0 0 1rem;
+  color: var(--p-on-surface-02);
+}
+
+h3 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--p-on-surface-01);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 480px;
+}

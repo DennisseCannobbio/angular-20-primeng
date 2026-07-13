@@ -1,0 +1,38 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+// Fila que agrupa el control y el label. Por defecto el label va al lado
+// (a la derecha); con labelPosition 'top' se apila arriba del control.
+.switch-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label-top .switch-row {
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
+
+.label {
+  font-size: var(--bs-font-size-neg-1); // 14px — escala del Figma
+  line-height: var(--bs-line-height-title); // 125% (texto corto)
+  color: var(--p-on-surface-01);
+  cursor: pointer;
+
+  .required-asterisk {
+    color: var(--p-error-01);
+    margin-left: 0.125rem;
+  }
+}
+
+:host ::ng-deep {
+  // Estado inválido: refuerza el borde/color de error en el slider.
+  .p-toggleswitch.p-invalid > .p-toggleswitch-slider {
+    border-color: var(--p-form-field-invalid-border-color);
+  }
+}

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -15,11 +16,18 @@ export type IconPosition = 'left' | 'right';
 
 @Component({
   selector: 'app-input-text',
-  imports: [InputTextModule, IconFieldModule, InputIconModule, Message],
+  imports: [InputTextModule, IconFieldModule, InputIconModule, FormsModule, Message],
   templateUrl: './input-text.html',
   styleUrl: './input-text.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputText),
+      multi: true,
+    },
+  ],
 })
-export class InputText {
+export class InputText implements ControlValueAccessor {
   /** Etiqueta (label) que se muestra arriba del input. */
   @Input() label = '';
 
@@ -50,8 +58,51 @@ export class InputText {
   /** Si es true, el input se deshabilita y no permite interacción. */
   @Input() isDisabled: boolean = false;
 
+  /** Deshabilitado por el formulario reactivo (setDisabledState). */
+  disabledByForm: boolean = false;
+
+  /** El control está deshabilitado si lo indica el @Input() o el formulario. */
+  get disabled(): boolean {
+    return this.isDisabled || this.disabledByForm;
+  }
+
   /** Texto de placeholder a mostrar cuando el input está vacío. */
   @Input() placeholder: string = '';
+
+  /**
+   * Valor actual del input. Es el estado interno enlazado con el
+   * ControlValueAccessor: lo escribe el formulario (writeValue) y lo emite
+   * el usuario al escribir (onModelChange).
+   */
+  value: string = '';
+
+  /** Callbacks registrados por Angular Forms. */
+  private onChange: (value: any) => void = () => {};
+  private onTouched: () => void = () => {};
+
+  /** Angular Forms → escribe el valor en el control. */
+  writeValue(value: any): void {
+    this.value = value ?? '';
+  }
+
+  registerOnChange(fn: (value: any) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabledByForm = isDisabled;
+  }
+
+  /** El usuario escribió: propaga el valor al formulario. */
+  onModelChange(value: any): void {
+    this.value = value;
+    this.onChange(value);
+    this.onTouched();
+  }
 
   /** Mensaje de error (tiene prioridad y se muestra cuando el input es inválido). */
   @Input() errorMessage: string = '';

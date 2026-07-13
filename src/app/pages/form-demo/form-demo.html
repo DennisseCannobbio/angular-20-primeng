@@ -1,0 +1,83 @@
+<div class="form-demo">
+  <h1>Ejemplo · Formulario reactivo (FormGroup)</h1>
+  <p class="subtitle">
+    Los tres componentes reutilizables (<code>app-input-text</code>,
+    <code>app-select</code>, <code>app-switch</code>) se enlazan con
+    <code>formControlName</code> gracias a que implementan
+    <code>ControlValueAccessor</code>.
+  </p>
+
+  <div class="layout">
+    <!-- [formGroup] enlaza el <form> con el FormGroup del componente.
+         Cada control usa formControlName con la clave definida en fb.group(). -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+      <app-input-text
+        label="Nombre"
+        formControlName="nombre"
+        placeholder="Escribe tu nombre"
+        [required]="true"
+        [isInvalid]="showError('nombre')"
+        [errorMessage]="errorMessage('nombre')"
+        fieldIcon="person"
+      />
+
+      <app-input-text
+        label="Correo"
+        formControlName="correo"
+        placeholder="tucorreo@dominio.com"
+        [required]="true"
+        [isInvalid]="showError('correo')"
+        [errorMessage]="errorMessage('correo')"
+        fieldIcon="mail"
+      />
+
+      <app-select
+        label="Rol"
+        formControlName="rol"
+        [options]="roles"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Selecciona un rol"
+        [filter]="false"
+        [required]="true"
+        [isInvalid]="showError('rol')"
+        [errorMessage]="errorMessage('rol')"
+      />
+
+      <app-switch
+        label="Acepto los términos y condiciones"
+        formControlName="aceptaTerminos"
+        [required]="true"
+        [isInvalid]="showError('aceptaTerminos')"
+        [errorMessage]="errorMessage('aceptaTerminos')"
+      />
+
+      <div class="actions">
+        <p-button type="submit" label="Enviar" />
+        <p-button type="button" label="Limpiar" severity="secondary" [outlined]="true"
+          (onClick)="onReset()" />
+        <p-button type="button" label="Deshabilitar nombre" severity="secondary" [text]="true"
+          (onClick)="toggleNombreDisabled()" />
+      </div>
+    </form>
+
+    <!-- Panel de depuración: muestra en vivo el estado del formulario.
+         Útil mientras aprendes; en producción se elimina. -->
+    <aside class="debug">
+      <h2>Estado del formulario</h2>
+      <dl class="debug__flags">
+        <div><dt>valid</dt><dd>{{ form.valid }}</dd></div>
+        <div><dt>invalid</dt><dd>{{ form.invalid }}</dd></div>
+        <div><dt>touched</dt><dd>{{ form.touched }}</dd></div>
+        <div><dt>dirty</dt><dd>{{ form.dirty }}</dd></div>
+        <div><dt>submitted</dt><dd>{{ submitted }}</dd></div>
+      </dl>
+
+      <h3>form.value</h3>
+      <pre>{{ form.value | json }}</pre>
+
+      <h3>form.getRawValue() <small>(incluye deshabilitados)</small></h3>
+      <pre>{{ form.getRawValue() | json }}</pre>
+    </aside>
+  </div>
+</div>
