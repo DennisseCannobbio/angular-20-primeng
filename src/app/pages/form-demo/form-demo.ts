@@ -9,13 +9,14 @@ import { ButtonModule } from 'primeng/button';
 import { InputText } from '../../shared/components/input-text/input-text';
 import { Select } from '../../shared/components/select/select';
 import { Switch } from '../../shared/components/switch/switch';
+import { AppFile } from '../../shared/components/file/file';
 
 @Component({
   selector: 'app-form-demo',
   // ReactiveFormsModule es lo que habilita [formGroup] y formControlName.
   // Los tres componentes reutilizables implementan ControlValueAccessor, por
   // eso pueden usarse con formControlName igual que un <input> nativo.
-  imports: [ReactiveFormsModule, JsonPipe, ButtonModule, InputText, Select, Switch],
+  imports: [ReactiveFormsModule, JsonPipe, ButtonModule, InputText, Select, Switch, AppFile],
   templateUrl: './form-demo.html',
   styleUrl: './form-demo.scss',
 })
@@ -37,6 +38,8 @@ export class FormDemo {
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     correo: ['', [Validators.required, Validators.email]],
     rol: [null as string | null, Validators.required],
+    imagen_perfil: [null as any, Validators.required],
+    documento: [null as any, Validators.required],
     // requiredTrue: el switch DEBE quedar activado para que el form sea válido.
     aceptaTerminos: [false, Validators.requiredTrue],
   });
@@ -63,6 +66,11 @@ export class FormDemo {
       const min = control.errors['minlength'].requiredLength;
       return `Usa al menos ${min} caracteres.`;
     }
+    
+    // Para errores de archivo, retornamos vacío para que <app-file> muestre 
+    // su propio mensaje interno detallado (internalError).
+    if (control.errors['accept'] || control.errors['maxFileSize']) return '';
+
     return 'Valor inválido.';
   }
 
@@ -86,6 +94,8 @@ export class FormDemo {
       nombre: '',
       correo: '',
       rol: null,
+      imagen_perfil: null,
+      documento: null,
       aceptaTerminos: false,
     });
   }

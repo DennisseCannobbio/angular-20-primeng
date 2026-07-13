@@ -1,0 +1,54 @@
+<div class="preview">
+  <h1>File</h1>
+  <p class="subtitle">Componente <code>app-file</code> y todas sus variantes.</p>
+
+  <section>
+    <h2>Variantes</h2>
+    <div class="row" style="gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+      <div class="col" style="flex: 1; min-width: 300px;">
+        <app-file
+          label="Archivo Único (Imagen)"
+          [(ngModel)]="singleFile"
+          accept="image/jpeg, image/png"
+          [maxFileSize]="1000000"
+          hint="Solo imágenes, máx 1MB"
+          [required]="true"
+        />
+      </div>
+
+      <div class="col" style="flex: 1; min-width: 300px;">
+        <app-file
+          label="Archivos Múltiples (Docs)"
+          [(ngModel)]="multipleFiles"
+          [multiple]="true"
+          [maxFileSize]="1000000"
+          accept=".pdf,.doc,.docx"
+          hint="Permite PDF, DOC, DOCX"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top: 3rem;">
+    <h2>Estados</h2>
+    <div class="row" style="gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+      <div class="col" style="flex: 1; min-width: 300px;">
+        <app-file
+          label="Estado de Error"
+          [(ngModel)]="invalidFile"
+          [isInvalid]="true"
+          errorMessage="Formato incorrecto: cambia el archivo por una imagen JPG o PNG e inténtalo otra vez."
+        />
+      </div>
+
+      <div class="col" style="flex: 1; min-width: 300px;">
+        <app-file
+          label="Deshabilitado"
+          [(ngModel)]="disabledFile"
+          [isDisabled]="true"
+          hint="El usuario no puede interactuar con esta área"
+        />
+      </div>
+    </div>
+  </section>
+</div>
