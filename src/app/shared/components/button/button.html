@@ -1,0 +1,36 @@
+<p-button
+  [label]="label"
+  [iconPos]="iconPos"
+  [badge]="badge"
+  [badgeSeverity]="badgeSeverity"
+  [severity]="severity"
+  [outlined]="variant === 'outlined'"
+  [text]="variant === 'text'"
+  [link]="variant === 'link'"
+  [raised]="raised"
+  [rounded]="rounded"
+  [size]="size"
+  [fluid]="fluid"
+  [disabled]="disabled"
+  [loading]="loading"
+  [type]="type"
+  (onClick)="handleClick($event)"
+>
+  <!-- No usamos [icon] de PrimeNG porque espera una clase CSS (PrimeIcons):
+       en Material Symbols el nombre es el CONTENIDO del span, no la clase.
+       Con el template #icon, PrimeNG omite su span y proyecta este en el slot,
+       así iconPos/gap/solo-icono siguen funcionando igual.
+       El nombre se lee vía `iconName` porque dentro del <ng-template #icon> la
+       referencia #icon eclipsa al @Input() icon (sería el TemplateRef). -->
+  @if (icon) {
+    <ng-template #icon>
+      <span class="material-symbols-outlined">{{ iconName }}</span>
+    </ng-template>
+  }
+
+  <!-- Mismo motivo que #icon: [loadingIcon] espera una clase CSS. El default
+       es 'progress_activity' (el mismo spinner que usa app-select). -->
+  <ng-template #loadingicon>
+    <span class="material-symbols-outlined app-button-spinner">{{ loadingIconName }}</span>
+  </ng-template>
+</p-button>
