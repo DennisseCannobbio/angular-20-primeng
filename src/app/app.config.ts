@@ -24,8 +24,10 @@ export const appConfig: ApplicationConfig = {
         options: {
           // Prefijo con el que se generan las variables CSS (--p-...).
           prefix: 'p',
-          // Nombre de la clase que activa el modo oscuro. Con 'system' seguiría
-          // la preferencia del SO; usa un selector para controlarlo tú:
+          // El preset sólo define modo claro. Mantenemos este selector (en vez
+          // de quitarlo) porque el default de PrimeNG es 'system': sin él, el
+          // SO en oscuro activaría un dark a medias. Como nada aplica la clase
+          // .app-dark, la app queda siempre en claro.
           darkModeSelector: '.app-dark',
           // Capa CSS para que tus estilos ganen a los de PrimeNG sin !important.
           cssLayer: {

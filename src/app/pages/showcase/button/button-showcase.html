@@ -1,26 +1,140 @@
 <div class="preview">
   <h1>Button</h1>
-  <p class="subtitle">Botones de PrimeNG por severidad y estilo.</p>
+  <p class="subtitle">Componente <code>app-button</code> y todas sus variantes.</p>
 
   <section>
+    <h2>Severidades</h2>
+    <p class="hint">Color del botón según su intención. Por defecto es <code>primary</code>.</p>
     <div class="row">
       @for (s of severities; track s.label) {
-      <p-button [label]="s.label" [severity]="s.severity" />
+      <app-button [label]="s.label" [severity]="s.severity" />
       }
     </div>
+  </section>
+
+  <section>
+    <h2>Variantes</h2>
+    <p class="hint">
+      La variante cambia el estilo; se combina con cualquier severidad.
+      <code>secondary</code> ya se ve outlined por defecto.
+    </p>
 
     <h3>Outlined</h3>
     <div class="row">
       @for (s of severities; track s.label) {
-      <p-button [label]="s.label" [severity]="s.severity" [outlined]="true" />
+      <app-button [label]="s.label" [severity]="s.severity" variant="outlined" />
       }
     </div>
 
     <h3>Text</h3>
     <div class="row">
       @for (s of severities; track s.label) {
-      <p-button [label]="s.label" [severity]="s.severity" [text]="true" />
+      <app-button [label]="s.label" [severity]="s.severity" variant="text" />
       }
+    </div>
+
+    <h3>Link</h3>
+    <div class="row">
+      @for (s of severities; track s.label) {
+      <app-button [label]="s.label" [severity]="s.severity" variant="link" />
+      }
+    </div>
+
+    <h3>Raised & Rounded</h3>
+    <div class="row">
+      @for (s of severities; track s.label) {
+      <app-button [label]="s.label" [severity]="s.severity" [raised]="true" [rounded]="true" />
+      }
+    </div>
+  </section>
+
+  <section>
+    <h2>Tamaños</h2>
+    <p class="hint">Sin <code>size</code> el botón usa el tamaño normal.</p>
+    <div class="row">
+      <app-button label="Small" size="small" />
+      <app-button label="Normal" />
+      <app-button label="Large" size="large" />
+    </div>
+  </section>
+
+  <section>
+    <h2>Iconos</h2>
+    <p class="hint">
+      Los iconos son <strong>Material Symbols</strong>: se pasa el nombre del icono
+      (ej. <code>check</code>), no una clase CSS.
+    </p>
+
+    <h3>Posición del icono</h3>
+    <div class="row">
+      @for (p of iconPositions; track p.label) {
+      <app-button [label]="p.label" [icon]="p.icon" [iconPos]="p.iconPos" />
+      }
+    </div>
+
+    <h3>Solo icono</h3>
+    <p class="hint">Si se omite el <code>label</code>, el botón queda de solo icono.</p>
+    <div class="row">
+      <app-button icon="search" />
+      <app-button icon="favorite" [rounded]="true" />
+      <app-button icon="delete" severity="danger" [rounded]="true" />
+      <app-button icon="edit" severity="secondary" [rounded]="true" />
+    </div>
+  </section>
+
+  <section>
+    <h2>Badge</h2>
+    <p class="hint">
+      <code>badge</code> muestra un contador; <code>badgeSeverity</code> le da color.
+    </p>
+    <div class="row">
+      <app-button label="Notificaciones" icon="notifications" badge="3" />
+      <app-button label="Errores" icon="error" badge="7" badgeSeverity="danger" />
+    </div>
+  </section>
+
+  <section>
+    <h2>Estados</h2>
+    <div class="row">
+      <app-button label="Normal" />
+      <app-button label="Disabled" [disabled]="true" />
+      <app-button label="Loading" [loading]="true" />
+    </div>
+
+    <h3>Loading interactivo</h3>
+    <p class="hint">Simula una acción asíncrona: vuelve a su estado normal tras 2 segundos.</p>
+    <div class="row">
+      <app-button
+        label="Guardar"
+        icon="save"
+        [loading]="isLoading()"
+        (onClick)="simularCarga()"
+      />
+    </div>
+  </section>
+
+  <section>
+    <h2>Evento onClick</h2>
+    <p class="hint">
+      El botón emite <code>onClick</code> solo si no está deshabilitado ni cargando.
+    </p>
+    <div class="row">
+      <app-button label="Púlsame" icon="ads_click" (onClick)="clicks.set(clicks() + 1)" />
+      <app-button
+        label="Reiniciar"
+        variant="text"
+        severity="secondary"
+        (onClick)="clicks.set(0)"
+      />
+      <span class="click-count">Clicks: {{ clicks() }}</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fluid</h2>
+    <p class="hint">Con <code>fluid</code> el botón ocupa todo el ancho de su contenedor.</p>
+    <div class="row row--fluid">
+      <app-button label="Fluid" [fluid]="true" />
     </div>
   </section>
 </div>

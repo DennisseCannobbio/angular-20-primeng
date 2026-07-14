@@ -57,9 +57,15 @@ src/theme/brand-preset.ts         # preset del tema (genera las variables --p-*)
 - Escala del Figma expuesta como **`--bs-*`** (ej. `--bs-font-size-neg-1`,
   `--bs-font-weight-bold`, `--bs-line-height-title`, `--bs-measure`).
 - **Usa siempre estas variables**, no valores hardcodeados, para respetar el tema.
-- Modo oscuro: se activa con la clase `.app-dark` (ver `darkModeSelector` en
-  `app.config.ts`). PrimeNG está en una CSS layer (`primeng`) para que tus
-  estilos ganen sin `!important`.
+- **Solo modo claro**: el preset define únicamente `colorScheme.light`. El
+  `darkModeSelector: '.app-dark'` de `app.config.ts` se mantiene a propósito
+  (evita el default `'system'`), pero nada aplica esa clase.
+- PrimeNG está en una CSS layer (`primeng`) para que tus estilos ganen sin
+  `!important`.
+- **Colores por componente**: van en `components.<x>.colorScheme.light.root`,
+  no en `components.<x>.root` (ahí solo medidas: radios, paddings, gaps). Es la
+  rama donde Aura define los suyos y la única que los sobrescribe; en `root` la
+  clave se ignora **en silencio**, sin error de build.
 - Las páginas de showcase reusan los estilos comunes con `@use '../showcase';`
   (el parcial `_showcase.scss`). No dupliques `.preview`/`.row`/`.col`.
 

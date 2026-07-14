@@ -1,0 +1,34 @@
+:host {
+  display: contents;
+}
+
+::ng-deep .p-button {
+  text-transform: uppercase;
+  border-width: var(--p-sizing-border-02, 2px) !important;
+
+  // El icono se alineaba por baseline (es inline-block), lo que lo dejaba
+  // desfasado respecto al label. El botón ya es flex, así que basta con sacar
+  // el span del flujo inline para que el centrado vertical lo resuelva flex.
+  .material-symbols-outlined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // Escala con el texto del botón en vez del 1.5rem fijo de la clase base,
+    // para que el icono no se vea enorme en el botón small.
+    font-size: 1.25em;
+  }
+
+  // Giro continuo del icono de carga.
+  .app-button-spinner {
+    animation: app-button-spin 1s linear infinite;
+  }
+}
+
+@keyframes app-button-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

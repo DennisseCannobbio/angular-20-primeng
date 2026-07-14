@@ -1,1 +1,32 @@
 @use '../showcase';
+
+// Texto explicativo bajo cada <h2>. Local a esta página: si otro showcase lo
+// necesita, conviene promoverlo a _showcase.scss.
+.hint {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: var(--p-on-surface-01);
+}
+
+// Nombres de inputs/valores dentro del texto explicativo.
+code {
+  padding: 0.1em 0.35em;
+  border-radius: var(--p-radius-border-01);
+  background: var(--p-container-02);
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+// Contador de la demo del @Output() onClick.
+.click-count {
+  color: var(--p-on-surface-01);
+  font-size: 0.9rem;
+}
+
+// El .row es flex, así que un botón fluid se encogería a su contenido en vez
+// de estirarse. Esta fila le da el ancho completo para que se note el efecto.
+// El selector apunta al .p-button y no a app-button porque el host de éste es
+// `display: contents`: el hijo directo del flex es el <button> de PrimeNG.
+.row--fluid ::ng-deep .p-button {
+  flex: 1;
+}

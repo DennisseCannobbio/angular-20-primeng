@@ -384,8 +384,10 @@ export const BrandPreset = definePreset(Aura, {
       },
     },
 
-    // Esquemas de color claro / oscuro. Aquí decides qué tono de "primary"
-    // se usa en cada modo, colores de superficie (fondos), texto, etc.
+    // Esquema de color. Aquí van los tokens GLOBALES (primary, surface,
+    // formField): aplican a toda la app. Los colores de un componente concreto
+    // van en components.<x>.colorScheme.light, más abajo.
+    // Sólo definimos `light`: la app no tiene modo oscuro.
     colorScheme: {
       light: {
         primary: {
@@ -432,30 +434,6 @@ export const BrandPreset = definePreset(Aura, {
           950: '{neutral.950}',
         },
       },
-      dark: {
-        primary: {
-          color: '{primary.400}',
-          contrastColor: '{primary.950}',
-          hoverColor: '{primary.300}',
-          activeColor: '{primary.200}',
-        },
-        // Superficies (modo oscuro): escala neutral INVERTIDA para que los
-        // fondos sean oscuros y los textos claros.
-        surface: {
-          0: '{neutral.950}',
-          50: '{neutral.900}',
-          100: '{neutral.800}',
-          200: '{neutral.700}',
-          300: '{neutral.600}',
-          400: '{neutral.500}',
-          500: '{neutral.400}',
-          600: '{neutral.300}',
-          700: '{neutral.200}',
-          800: '{neutral.100}',
-          900: '{neutral.50}',
-          950: '{neutral.0}',
-        },
-      },
     },
   },
 
@@ -466,8 +444,59 @@ export const BrandPreset = definePreset(Aura, {
   // message.text.fontSize → --p-message-text-font-size.
   // OJO: aquí no se pueden usar referencias {...} a las variables --bs-* (viven
   // en :root del SCSS, fuera del árbol del preset). Se usa var(--bs-*) como
-  // string para mantener la variable como única fuente de verdad (14px).
   components: {
+    button: {
+      // `root` es sólo para lo que NO depende del modo claro/oscuro (medidas).
+      // Los colores por severidad van en colorScheme.light.root: es ahí donde
+      // Aura los define, y por tanto la única rama que los sobrescribe. Puestos
+      // aquí, la clave se ignora en silencio (sin error de build) y gana Aura.
+      root: {
+        borderRadius: '{radiusBorder.04}',
+        paddingX: '{spacing.06}',
+        gap: '{spacing.02}',
+      },
+      colorScheme: {
+        light: {
+          root: {
+            primary: {
+              background: '{accent.01}',
+              borderColor: '{accent.01}',
+              color: '{accent.onAccent01}',
+              hoverColor: '{accent.onAccent01}',
+              hoverBackground: '{accent.02}',
+              hoverBorderColor: '{accent.02}',
+            },
+            secondary: {
+              background: 'transparent',
+              borderColor: '{accent.01}',
+              color: '{accent.01}',
+              hoverBackground: '{container.05}',
+              hoverColor: '{accent.02}',
+              hoverBorderColor: '{accent.02}',
+              activeBackground: '{container.05}',
+              activeBorderColor: '{accent.02}',
+              activeColor: '{accent.02}',
+            },
+            success: {
+              background: '{success.container01}',
+              borderColor: '{success.border01}',
+              color: '{success.onSuccess01}',
+              hoverBackground: '{success.container02}',
+              hoverBorderColor: '{success.border02}',
+              hoverColor: '{success.onSuccess02}',
+            },
+            danger: {
+              background: '{error.container01}',
+              borderColor: '{error.border01}',
+              color: '{error.onError01}',
+              hoverBackground: '{error.container02}',
+              hoverBorderColor: '{error.border02}',
+              hoverColor: '{error.onError02}',
+            },
+          },
+        },
+      },
+    },
     select: {
       dropdown: {
         color: '{accent.01}', // Figma blue/50 (blue accent) para la flecha
