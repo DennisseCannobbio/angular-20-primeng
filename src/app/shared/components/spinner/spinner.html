@@ -1,0 +1,14 @@
+<div class="spinner-container" [class.flex-row]="labelPos === 'right'" [class.flex-col]="labelPos === 'bottom'">
+  <p-progressSpinner 
+    [class]="styleClass"
+    [style]="computedStyle" 
+    [strokeWidth]="strokeWidth" 
+    [fill]="fill" 
+    [animationDuration]="animationDuration" 
+    [ariaLabel]="ariaLabel">
+  </p-progressSpinner>
+  
+  @if (label) {
+    <span class="spinner-label">{{ label }}</span>
+  }
+</div>

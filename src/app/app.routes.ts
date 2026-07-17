@@ -58,6 +58,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/showcase/table/table-showcase').then(m => m.TableShowcase),
       },
+      {
+        path: 'spinner',
+        loadComponent: () =>
+          import('./pages/showcase/spinner/spinner-showcase').then(m => m.SpinnerShowcase),
+      },
     ],
   },
   {
