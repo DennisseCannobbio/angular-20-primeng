@@ -73,5 +73,11 @@ export class Sandbox {
       route: '/form-demo',
       icon: 'checklist',
     },
+    {
+      title: 'Spinner',
+      description: 'Indicador de carga parametrizable con estilos de PrimeNG.',
+      route: '/showcase/spinner',
+      icon: 'progress_activity',
+    },
   ];
 }

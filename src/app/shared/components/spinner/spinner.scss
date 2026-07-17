@@ -1,0 +1,24 @@
+:host {
+  display: inline-flex;
+}
+
+.spinner-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--p-spacing-02);
+
+  &.flex-col {
+    flex-direction: column;
+  }
+  
+  &.flex-row {
+    flex-direction: row;
+  }
+}
+
+.spinner-label {
+  color: var(--p-on-surface-01);
+  font-size: var(--bs-font-size-neg-1);
+  font-weight: var(--bs-font-weight-medium);
+}

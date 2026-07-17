@@ -1,0 +1,33 @@
+<div class="preview">
+  <h1>Spinner</h1>
+  <p class="subtitle">Componente <code>app-spinner</code> para indicar estados de carga.</p>
+
+  <section>
+    <h2>Variantes</h2>
+    <p class="hint">Diferentes estilos visuales ajustando las propiedades de la animación y el trazo.</p>
+    <div class="row">
+      <app-spinner label="Por defecto"></app-spinner>
+      <app-spinner label="Trazo grueso" strokeWidth="8"></app-spinner>
+      <app-spinner label="Rápida" animationDuration=".5s"></app-spinner>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tamaños</h2>
+    <p class="hint">El spinner soporta tres tamaños predefinidos mediante la propiedad <code>size</code>.</p>
+    <div class="row" style="align-items: flex-end;">
+      <app-spinner label="Small" size="small"></app-spinner>
+      <app-spinner label="Normal"></app-spinner>
+      <app-spinner label="Large" size="large"></app-spinner>
+    </div>
+  </section>
+
+  <section>
+    <h2>Posición del Texto</h2>
+    <p class="hint">Controla la ubicación del texto con <code>labelPos</code>.</p>
+    <div class="row">
+      <app-spinner label="Abajo (por defecto)" labelPos="bottom"></app-spinner>
+      <app-spinner label="A la derecha" labelPos="right"></app-spinner>
+    </div>
+  </section>
+</div>

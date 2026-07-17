@@ -497,6 +497,18 @@ export const BrandPreset = definePreset(Aura, {
         },
       },
     },
+    progressspinner: {
+      colorScheme: {
+        light: {
+          root: {
+            colorOne: '{accent.01}',
+            colorTwo: '{accent.01}',
+            colorThree: '{accent.01}',
+            colorFour: '{accent.01}',
+          }
+        }
+      }
+    },
     select: {
       dropdown: {
         color: '{accent.01}', // Figma blue/50 (blue accent) para la flecha
