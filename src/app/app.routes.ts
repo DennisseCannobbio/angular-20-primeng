@@ -68,6 +68,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/showcase/date/date-showcase').then(m => m.DateShowcase),
       },
+      {
+        path: 'radio-button',
+        loadComponent: () =>
+          import('./pages/showcase/radio-button/radio-button-showcase').then(
+            m => m.RadioButtonShowcase,
+          ),
+      },
     ],
   },
   {

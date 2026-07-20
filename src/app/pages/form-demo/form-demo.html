@@ -2,9 +2,10 @@
   <h1>Ejemplo · Formulario reactivo (FormGroup)</h1>
   <p class="subtitle">
     Los componentes reutilizables (<code>app-input-text</code>,
-    <code>app-select</code>, <code>app-date</code>, <code>app-file</code>,
-    <code>app-switch</code>) se enlazan con <code>formControlName</code> gracias
-    a que implementan <code>ControlValueAccessor</code>.
+    <code>app-select</code>, <code>app-radio-button</code>, <code>app-date</code>,
+    <code>app-file</code>, <code>app-switch</code>) se enlazan con
+    <code>formControlName</code> gracias a que implementan
+    <code>ControlValueAccessor</code>.
   </p>
 
   <div class="layout">
@@ -42,6 +43,16 @@
         [required]="true"
         [isInvalid]="showError('rol')"
         [errorMessage]="errorMessage('rol')"
+      />
+
+      <app-radio-button
+        label="Objetivo de la campaña"
+        formControlName="objetivo"
+        [options]="objetivos"
+        [card]="true"
+        [required]="true"
+        [isInvalid]="showError('objetivo')"
+        [errorMessage]="errorMessage('objetivo')"
       />
 
       <app-date

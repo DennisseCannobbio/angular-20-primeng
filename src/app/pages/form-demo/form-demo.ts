@@ -11,13 +11,24 @@ import { Select } from '../../shared/components/select/select';
 import { Switch } from '../../shared/components/switch/switch';
 import { AppFile } from '../../shared/components/file/file';
 import { DatePicker } from '../../shared/components/date/date';
+import { RadioButton, RadioButtonOption } from '../../shared/components/radio-button/radio-button';
 
 @Component({
   selector: 'app-form-demo',
   // ReactiveFormsModule es lo que habilita [formGroup] y formControlName.
-  // Los tres componentes reutilizables implementan ControlValueAccessor, por
+  // Los componentes reutilizables implementan ControlValueAccessor, por
   // eso pueden usarse con formControlName igual que un <input> nativo.
-  imports: [ReactiveFormsModule, JsonPipe, ButtonModule, InputText, Select, Switch, AppFile, DatePicker],
+  imports: [
+    ReactiveFormsModule,
+    JsonPipe,
+    ButtonModule,
+    InputText,
+    Select,
+    Switch,
+    AppFile,
+    DatePicker,
+    RadioButton,
+  ],
   templateUrl: './form-demo.html',
   styleUrl: './form-demo.scss',
 })
@@ -31,6 +42,31 @@ export class FormDemo {
     { label: 'Lector', value: 'viewer' },
   ];
 
+  // Opciones tipo tarjeta para el radio (ícono + título + subtítulo).
+  readonly objetivos: RadioButtonOption[] = [
+    {
+      label: 'Promocionales',
+      value: 'promo',
+      title: 'Promocionales',
+      subtitle: 'Impulsa el uso de cupones y beneficios con ofertas relevantes',
+      icon: 'campaign',
+    },
+    {
+      label: 'Crecimiento',
+      value: 'crecimiento',
+      title: 'Crecimiento',
+      subtitle: 'Invita a asegurados a ampliar coberturas o contratar nuevos productos',
+      icon: 'trending_up',
+    },
+    {
+      label: 'Retención',
+      value: 'retencion',
+      title: 'Retención',
+      subtitle: 'Previene cancelaciones con mensajes antes del vencimiento de la póliza',
+      icon: 'group',
+    },
+  ];
+
   // ---- Definición del formulario reactivo ----
   // Cada control declara su valor inicial y sus validadores. El nombre de la
   // clave (nombre, correo, rol, aceptaTerminos) es el que luego se enlaza en
@@ -39,6 +75,7 @@ export class FormDemo {
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     correo: ['', [Validators.required, Validators.email]],
     rol: [null as string | null, Validators.required],
+    objetivo: [null as string | null, Validators.required],
     fecha_inicio: [null as Date | null, Validators.required],
     imagen_perfil: [null as any, Validators.required],
     documento: [null as any, Validators.required],
@@ -96,6 +133,7 @@ export class FormDemo {
       nombre: '',
       correo: '',
       rol: null,
+      objetivo: null,
       fecha_inicio: null,
       imagen_perfil: null,
       documento: null,

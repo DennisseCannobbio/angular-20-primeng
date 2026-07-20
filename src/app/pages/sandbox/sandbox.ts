@@ -85,5 +85,11 @@ export class Sandbox {
       route: '/showcase/date',
       icon: 'calendar_month',
     },
+    {
+      title: 'Radio Button',
+      description: 'Grupo de radios con opciones simples o en modo tarjeta.',
+      route: '/showcase/radio-button',
+      icon: 'radio_button_checked',
+    },
   ];
 }
