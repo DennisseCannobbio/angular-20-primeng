@@ -1,0 +1,58 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-size: var(--bs-font-size-neg-1); // 14px — escala del Figma
+  line-height: var(--bs-line-height-title); // 125% (texto corto)
+  color: var(--p-on-surface-01);
+
+  .required-asterisk {
+    color: var(--p-error-01);
+    margin-left: 0.125rem;
+  }
+}
+
+:host ::ng-deep {
+  // El ancho lo controla el @Input() fluid (que mapea a [fluid] de PrimeNG):
+  // por defecto el datepicker toma su ancho natural; con fluid ocupa el 100%.
+  // Por eso NO forzamos width aquí.
+
+  // El ícono va dentro del input (iconDisplay="input") y PrimeNG lo posiciona
+  // en absoluto contra el borde derecho de la raíz .p-datepicker. La raíz es
+  // inline-flex y sin fluid el <input> conserva su ancho intrínseco del
+  // navegador, que no coincide con el borde de la raíz → el ícono queda fuera.
+  // Replicamos el reparto flex que PrimeNG aplica en modo fluid para que el
+  // input llene la raíz y el ícono se ancle a su borde derecho.
+  .p-datepicker:not(.p-datepicker-fluid) .p-datepicker-input {
+    flex: 1 1 auto;
+    width: 1%;
+  }
+
+  .p-datepicker.p-invalid:not(.p-disabled):hover,
+  .p-datepicker.p-invalid:not(.p-disabled).p-focus {
+    border-color: var(--p-form-field-invalid-border-color);
+  }
+
+  // PrimeNG centra el contenedor del ícono en absoluto con top: 50% + un margin
+  // negativo calculado para el alto exacto de un ícono SVG (icon.size). Nuestro
+  // span de Material Symbols es más alto y tiene su propio line-box, así que ese
+  // margin lo deja descentrado. Anulamos el margin y centramos con transform.
+  .p-datepicker-input-icon-container {
+    display: inline-flex;
+    align-items: center;
+    margin-block-start: 0;
+    transform: translateY(-50%);
+  }
+
+  // Ícono (Material Symbols) que reemplaza el inputicon de PrimeNG. Se dibuja
+  // dentro del input; alineado al color de ícono de los campos de formulario.
+  .date-input-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--p-on-surface-02);
+    cursor: pointer;
+  }
+}

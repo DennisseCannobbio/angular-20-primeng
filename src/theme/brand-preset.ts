@@ -514,6 +514,30 @@ export const BrandPreset = definePreset(Aura, {
         color: '{accent.01}', // Figma blue/50 (blue accent) para la flecha
       },
     },
+    datepicker: {
+      // Colores del calendario. Van en colorScheme.light: es la rama donde Aura
+      // define date/today (fondos de día seleccionado, hoy y rango). En `root`
+      // se ignorarían en silencio.
+      colorScheme: {
+        light: {
+          date: {
+            // Día/mes/año seleccionado: círculo con el accent del Figma.
+            selectedBackground: '{accent.container01}', // Figma blue/50
+            selectedColor: '{accent.onAccent01}', // texto sobre accent (blanco)
+            // Días intermedios de un rango: accent más oscuro (se refuerza en
+            // el SCSS con font-weight bold, que no tiene token propio).
+            rangeSelectedBackground: '{accent.container02}', // Figma blue/40
+            rangeSelectedColor: '{accent.onAccent01}',
+          },
+          today: {
+            // Fecha de hoy: círculo de fondo container.02 (neutral/95) con el
+            // número en color normal y bold (el bold se aplica en el SCSS).
+            background: '{container.02}', // Figma neutral/95 (círculo)
+            color: '{on.surface.02}', // número en color de texto normal
+          },
+        },
+      },
+    },
     message: {
       content: {
         gap: '{spacing.01}', // 4px — Figma spacing-01 (acerca el ícono al texto)

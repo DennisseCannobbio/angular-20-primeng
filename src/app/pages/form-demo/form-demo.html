@@ -1,10 +1,10 @@
 <div class="form-demo">
   <h1>Ejemplo · Formulario reactivo (FormGroup)</h1>
   <p class="subtitle">
-    Los tres componentes reutilizables (<code>app-input-text</code>,
-    <code>app-select</code>, <code>app-switch</code>) se enlazan con
-    <code>formControlName</code> gracias a que implementan
-    <code>ControlValueAccessor</code>.
+    Los componentes reutilizables (<code>app-input-text</code>,
+    <code>app-select</code>, <code>app-date</code>, <code>app-file</code>,
+    <code>app-switch</code>) se enlazan con <code>formControlName</code> gracias
+    a que implementan <code>ControlValueAccessor</code>.
   </p>
 
   <div class="layout">
@@ -42,6 +42,16 @@
         [required]="true"
         [isInvalid]="showError('rol')"
         [errorMessage]="errorMessage('rol')"
+      />
+
+      <app-date
+        label="Fecha de inicio"
+        formControlName="fecha_inicio"
+        placeholder="dd/mm/aaaa"
+        [required]="true"
+        [isInvalid]="showError('fecha_inicio')"
+        [errorMessage]="errorMessage('fecha_inicio')"
+        [showButtonBar]="true"
       />
 
       <app-file

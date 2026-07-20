@@ -1,0 +1,53 @@
+<div class="preview">
+  <h1>Date</h1>
+  <p class="subtitle">Componente <code>app-date</code> (p-datepicker) y todas sus variantes.</p>
+
+  <section>
+    <div class="row" style="gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+      @for (v of dateVariants; track v.title) {
+      <div class="col" style="flex: 1 1 260px; min-width: 260px;">
+        <h3>{{ v.title }}</h3>
+        <app-date
+          [label]="v.label"
+          [size]="v.size"
+          [variant]="v.variant ?? 'outlined'"
+          [fluid]="v.fluid ?? false"
+          [selectionMode]="v.selectionMode ?? 'single'"
+          [display]="v.display ?? 'popup'"
+          [view]="v.view ?? 'date'"
+          [icon]="v.icon ?? 'calendar_month'"
+          [placeholder]="v.placeholder ?? 'dd/mm/aaaa'"
+          [showButtonBar]="v.showButtonBar ?? false"
+          [showWeek]="v.showWeek ?? false"
+          [showTime]="v.showTime ?? false"
+          [timeOnly]="v.timeOnly ?? false"
+          [numberOfMonths]="v.numberOfMonths ?? 1"
+          [isDisabled]="v.isDisabled ?? false"
+          [isInvalid]="v.isInvalid ?? false"
+          [required]="v.required ?? false"
+          [errorMessage]="v.errorMessage ?? ''"
+          [message]="v.message ?? ''"
+          [messageSeverity]="v.messageSeverity ?? 'info'"
+          [materialIcon]="v.materialIcon ?? ''">
+        </app-date>
+      </div>
+      }
+
+      <div class="col" style="flex: 1 1 260px; min-width: 260px;">
+        <h3>Con límite (minDate = hoy)</h3>
+        <app-date
+          label="A partir de hoy"
+          [minDate]="hoy"
+          message="No permite elegir fechas pasadas."
+          messageSeverity="info"
+          materialIcon="info">
+        </app-date>
+      </div>
+
+      <div class="col" style="flex: 1 1 300px; min-width: 300px;">
+        <h3>Inline (calendario embebido)</h3>
+        <app-date label="Selección directa" display="inline"></app-date>
+      </div>
+    </div>
+  </section>
+</div>
