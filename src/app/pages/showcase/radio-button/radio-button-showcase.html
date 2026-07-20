@@ -1,0 +1,32 @@
+<div class="preview">
+  <h1>Radio Button</h1>
+  <p class="subtitle">
+    Componente <code>app-radio-button</code>, en modo simple y en modo tarjeta.
+  </p>
+
+  <section>
+    <div class="row" style="gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+      @for (v of radioVariants; track v.title) {
+      <div class="col" [style.flex]="v.card ? '1 1 100%' : '1 1 300px'" style="min-width: 300px;">
+        <h3>{{ v.title }}</h3>
+        <app-radio-button
+          [label]="v.label"
+          [options]="v.options"
+          [(ngModel)]="radioValues[v.title]"
+          [card]="v.card ?? false"
+          [layout]="v.layout ?? 'vertical'"
+          [size]="v.size"
+          [required]="v.required ?? false"
+          [isDisabled]="v.isDisabled ?? false"
+          [isInvalid]="v.isInvalid ?? false"
+          [errorMessage]="v.errorMessage ?? ''"
+          [message]="v.message ?? ''"
+          [messageSeverity]="v.messageSeverity ?? 'info'"
+          [messageVariant]="v.messageVariant ?? 'simple'"
+          [materialIcon]="v.materialIcon ?? ''">
+        </app-radio-button>
+      </div>
+      }
+    </div>
+  </section>
+</div>

@@ -509,6 +509,30 @@ export const BrandPreset = definePreset(Aura, {
         }
       }
     },
+    radiobutton: {
+      // `root` (medidas + colores del círculo exterior) e `icon` (el punto
+      // central) NO dependen del modo claro/oscuro, así que van aquí y no en
+      // colorScheme.light (a diferencia de button/datepicker, cuyos colores sí
+      // los define Aura en esa rama).
+      root: {
+        // Círculo sin seleccionar: borde gris (on-surface/02).
+        borderColor: '{on.surface.02}',
+        // Al seleccionar: borde con el accent del Figma...
+        checkedBorderColor: '{accent.01}',
+        checkedHoverBorderColor: '{accent.02}',
+        // ...pero el fondo NO se rellena de azul: se mantiene el fondo del input
+        // (blanco) para lograr el efecto "inverso" (relleno claro, punto azul).
+        checkedBackground: '{form.field.background}',
+        checkedHoverBackground: '{form.field.background}',
+      },
+      icon: {
+        // Punto central: se pinta con el accent en vez del blanco por defecto
+        // (Aura usa {primary.contrast.color}). Esto invierte el radio: círculo
+        // claro con el punto de color.
+        checkedColor: '{accent.01}',
+        checkedHoverColor: '{accent.02}',
+      },
+    },
     select: {
       dropdown: {
         color: '{accent.01}', // Figma blue/50 (blue accent) para la flecha

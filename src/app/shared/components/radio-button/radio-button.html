@@ -1,0 +1,69 @@
+<div class="input-container">
+  @if (label) {
+    <label class="group-label">
+      {{ label }}
+      @if (required) {
+        <span class="required-asterisk">*</span>
+      }
+    </label>
+  }
+
+  <!-- Grupo de opciones. En modo tarjeta (card) cada opción es una card con
+       ícono, título y subtítulo; en modo simple es un radio con label al lado. -->
+  <div
+    class="options"
+    [class.horizontal]="layout === 'horizontal'"
+    [class.card-mode]="card"
+    role="radiogroup">
+    @for (option of options; track option.value) {
+      @let optionDisabled = isOptionDisabled(option);
+      @let selected = value === option.value;
+      <label
+        class="option"
+        [class.card]="card"
+        [class.selected]="card && selected"
+        [class.invalid]="card && isInvalid"
+        [class.disabled]="optionDisabled">
+        <!-- Contenido de tarjeta: solo se pinta en modo card. -->
+        @if (card) {
+          <span class="card-body">
+            @if (option.icon) {
+              <span class="card-icon">
+                <span class="material-symbols-outlined">{{ option.icon }}</span>
+              </span>
+            }
+            <span class="card-text">
+              <span class="card-title">{{ option.title ?? option.label }}</span>
+              @if (option.subtitle) {
+                <span class="card-subtitle">{{ option.subtitle }}</span>
+              }
+            </span>
+          </span>
+        }
+
+        <p-radiobutton
+          [ngModel]="value"
+          (ngModelChange)="onModelChange($event)"
+          [value]="option.value"
+          [size]="$any(size)"
+          [disabled]="optionDisabled"
+          [invalid]="isInvalid" />
+
+        <!-- Label al lado del radio: solo en modo simple. -->
+        @if (!card) {
+          <span class="option-label">{{ option.label }}</span>
+        }
+      </label>
+    }
+  </div>
+
+  @if (isMessageVisible) {
+    <app-message
+      [severity]="displaySeverity"
+      [variant]="messageVariant"
+      [materialIcon]="materialIcon"
+      [text]="displayMessage"
+      size="small"
+    />
+  }
+</div>
