@@ -79,5 +79,11 @@ export class Sandbox {
       route: '/showcase/spinner',
       icon: 'progress_activity',
     },
+    {
+      title: 'Date',
+      description: 'Selector de fecha/hora con rango, estados y mensajes.',
+      route: '/showcase/date',
+      icon: 'calendar_month',
+    },
   ];
 }

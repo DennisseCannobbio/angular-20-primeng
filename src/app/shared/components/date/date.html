@@ -1,0 +1,56 @@
+<div class="input-container">
+  @if (label) {
+    <label class="label">
+      {{ label }}
+      @if (required) {
+        <span class="required-asterisk">*</span>
+      }
+    </label>
+  }
+  <p-datepicker
+      [ngModel]="value"
+      (ngModelChange)="onModelChange($event)"
+      [selectionMode]="selectionMode"
+      [inline]="display === 'inline'"
+      [view]="view"
+      [dateFormat]="dateFormat"
+      [placeholder]="placeholder"
+      [showIcon]="showIcon"
+      [showButtonBar]="showButtonBar"
+      [showWeek]="showWeek"
+      [showTime]="showTime"
+      [timeOnly]="timeOnly"
+      [hourFormat]="hourFormat"
+      [numberOfMonths]="numberOfMonths"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [disabledDates]="disabledDates"
+      [disabledDays]="disabledDays"
+      [readonlyInput]="readonlyInput"
+      [size]="size"
+      [variant]="variant"
+      [fluid]="fluid"
+      [appendTo]="appendTo"
+      [disabled]="disabled"
+      [invalid]="isInvalid"
+      iconDisplay="input"
+      panelStyleClass="app-date-panel">
+    <!-- Ícono con Material Symbols (PrimeIcons no está en el proyecto).
+         Reemplaza el inputicon por defecto de PrimeNG. El nombre del ícono es
+         parametrizable vía @Input() icon (ej. 'schedule' para hora). -->
+    <ng-template #inputicon let-clickCallBack="clickCallBack">
+      <span class="material-symbols-outlined date-input-icon" (click)="clickCallBack($event)">
+        {{ icon }}
+      </span>
+    </ng-template>
+  </p-datepicker>
+  @if (isMessageVisible) {
+    <app-message
+      [severity]="displaySeverity"
+      [variant]="messageVariant"
+      [materialIcon]="materialIcon"
+      [text]="displayMessage"
+      size="small"
+    />
+  }
+</div>

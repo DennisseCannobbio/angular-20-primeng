@@ -10,13 +10,14 @@ import { InputText } from '../../shared/components/input-text/input-text';
 import { Select } from '../../shared/components/select/select';
 import { Switch } from '../../shared/components/switch/switch';
 import { AppFile } from '../../shared/components/file/file';
+import { DatePicker } from '../../shared/components/date/date';
 
 @Component({
   selector: 'app-form-demo',
   // ReactiveFormsModule es lo que habilita [formGroup] y formControlName.
   // Los tres componentes reutilizables implementan ControlValueAccessor, por
   // eso pueden usarse con formControlName igual que un <input> nativo.
-  imports: [ReactiveFormsModule, JsonPipe, ButtonModule, InputText, Select, Switch, AppFile],
+  imports: [ReactiveFormsModule, JsonPipe, ButtonModule, InputText, Select, Switch, AppFile, DatePicker],
   templateUrl: './form-demo.html',
   styleUrl: './form-demo.scss',
 })
@@ -38,6 +39,7 @@ export class FormDemo {
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     correo: ['', [Validators.required, Validators.email]],
     rol: [null as string | null, Validators.required],
+    fecha_inicio: [null as Date | null, Validators.required],
     imagen_perfil: [null as any, Validators.required],
     documento: [null as any, Validators.required],
     // requiredTrue: el switch DEBE quedar activado para que el form sea válido.
@@ -94,6 +96,7 @@ export class FormDemo {
       nombre: '',
       correo: '',
       rol: null,
+      fecha_inicio: null,
       imagen_perfil: null,
       documento: null,
       aceptaTerminos: false,

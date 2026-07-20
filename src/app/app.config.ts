@@ -19,6 +19,46 @@ export const appConfig: ApplicationConfig = {
     // Sin esto se lanza NG05105 (@messageAnimation) y aborta el render.
     provideAnimationsAsync(),
     providePrimeNG({
+      // Traducción en español para componentes con textos propios (nombres de
+      // meses/días del p-datepicker, textos de vacío, etc.). Aplica global.
+      translation: {
+        firstDayOfWeek: 1, // la semana empieza en lunes
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+        monthNames: [
+          'Enero',
+          'Febrero',
+          'Marzo',
+          'Abril',
+          'Mayo',
+          'Junio',
+          'Julio',
+          'Agosto',
+          'Septiembre',
+          'Octubre',
+          'Noviembre',
+          'Diciembre',
+        ],
+        monthNamesShort: [
+          'Ene',
+          'Feb',
+          'Mar',
+          'Abr',
+          'May',
+          'Jun',
+          'Jul',
+          'Ago',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dic',
+        ],
+        today: 'Hoy',
+        clear: 'Limpiar',
+        dateFormat: 'dd/mm/yy',
+        weekHeader: 'Sm',
+      },
       theme: {
         preset: BrandPreset,
         options: {

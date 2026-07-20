@@ -15,4 +15,44 @@
     margin: 0;
     height: 100%;
   }
+
+  /* Datepicker (app-date): ajustes del panel que NO tienen design token propio.
+     El panel se renderiza con appendTo="body", fuera del :host del componente,
+     por eso estos estilos van aquí (globales) acotados a .app-date-panel, la
+     clase que app-date pone en su panelStyleClass. Los colores sí se manejan
+     por tokens en src/theme/brand-preset.ts (datepicker.date / datepicker.today). */
+  .app-date-panel {
+    /* Los números se veían subidos dentro del círculo: el número usa la
+       line-height heredada. Forzamos line-height 1 para que el flex del día lo
+       centre de verdad, vertical y horizontalmente. */
+    .p-datepicker-day {
+      line-height: 1;
+    }
+
+    /* Fecha de hoy: número en bold (el color lo da datepicker.today.color). */
+    .p-datepicker-today > .p-datepicker-day {
+      font-weight: var(--bs-font-weight-bold);
+    }
+
+    /* Días intermedios de un rango: bold además del fondo accent del token. */
+    .p-datepicker-day-selected-range {
+      font-weight: var(--bs-font-weight-bold);
+    }
+
+  }
+}
+
+/* Flechas de navegación (mes anterior/siguiente) y de la hora (incrementar/
+   decrementar) del datepicker. PrimeNG las dibuja como p-button secondary text
+   y les fija el color en la capa `primeng`, que —por el orden `@layer
+   app-styles, primeng`— gana a app-styles. Por eso este override va SIN capa:
+   los estilos sin capa siempre vencen a los de cualquier @layer. Se pinta en
+   accent.01 (mismo azul del día seleccionado); el ícono SVG hereda el color. */
+.app-date-panel {
+  .p-datepicker-prev-button,
+  .p-datepicker-next-button,
+  .p-datepicker-increment-button,
+  .p-datepicker-decrement-button {
+    color: var(--p-accent-01);
+  }
 }
