@@ -80,5 +80,9 @@ export const routes: Routes = [
   {
     path: 'form-demo',
     loadComponent: () => import('./pages/form-demo/form-demo').then(m => m.FormDemo)
+  },
+  {
+    path: 'listado-notificaciones',
+    loadComponent: () => import('./pages/notificacion/pages/listado-notificacion/listado-notificacion').then(m => m.ListadoNotificacionesComponent)
   }
 ];

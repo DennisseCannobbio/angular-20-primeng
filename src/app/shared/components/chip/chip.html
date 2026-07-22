@@ -1,0 +1,21 @@
+<div class="bs-chip" [ngClass]="['size-' + size, 'status-' + state]" [class.selected]="state === 'selected'"
+    (click)="onClick()" pRipple>
+
+    <div class="chip-content">
+
+        @if (iconClass) {
+        <i [class]="'chip-icon ' + iconClass"></i>
+        }
+
+        <ng-content select="svg"></ng-content>
+
+        <span class="chip-label">{{ label }}</span>
+    </div>
+
+    @if (state === 'removable' || state === 'error') {
+    <button class="chip-remove-btn" (click)="onRemove($event)" tabindex="0">
+        <span class="material-symbols-outlined">close</span>
+    </button>
+    }
+
+</div>

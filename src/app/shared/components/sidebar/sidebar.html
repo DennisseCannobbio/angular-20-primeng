@@ -1,0 +1,14 @@
+<!-- Overlay oscurecido (solo en modo slide con backdrop) -->
+@if (hasBackdrop && mode === 'slide' && isOpen) {
+<div class="bs-sidebar__overlay" (click)="onOverlayClick()"></div>
+}
+
+<!-- Panel -->
+<aside class="bs-sidebar" [class.bs-sidebar--open]="isOpen" [class.bs-sidebar--slide]="mode === 'slide'"
+    [class.bs-sidebar--push]="mode === 'push'" [class.bs-sidebar--left]="position === 'left'"
+    [class.bs-sidebar--right]="position === 'right'" [style.width]="anchoActual" [attr.aria-label]="ariaLabel"
+    [attr.aria-hidden]="esModal && !isOpen ? 'true' : null" [attr.role]="esModal ? 'dialog' : null"
+    [attr.aria-modal]="esModal ? 'true' : null" [cdkTrapFocus]="esModal && isOpen"
+    [cdkTrapFocusAutoCapture]="esModal && isOpen">
+    <ng-content></ng-content>
+</aside>
