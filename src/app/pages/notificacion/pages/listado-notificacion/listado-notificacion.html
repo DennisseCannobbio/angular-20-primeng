@@ -11,8 +11,12 @@
     <div class="actions-container w-100">
         <div class="search-card">
             <div class="input-wrapper">
-                <app-input-text label="Búsqueda" placeholder="Título de notificación o ID" fieldIcon="search"
-                    [(ngModel)]="busqueda">
+                <app-input-text
+                  label="Búsqueda"
+                  placeholder="Título de notificación o ID"
+                  [size]="'large'"
+                  fieldIcon="search"
+                  [(ngModel)]="busqueda">
                 </app-input-text>
             </div>
 
