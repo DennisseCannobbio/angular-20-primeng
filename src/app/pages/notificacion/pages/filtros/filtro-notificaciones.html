@@ -1,0 +1,63 @@
+<app-sidebar [(isOpen)]="visible" position="right" [hasBackdrop]="true" [closeOnOutsideClick]="true"
+    [closeOnEscape]="true" width="380px" ariaLabel="Filtrar notificaciones" (closed)="cerrar()">
+
+    <div class="filtro-sidebar">
+        <!-- Cabecera -->
+        <div class="filtro-sidebar__header">
+            <span class="filtro-sidebar__title">Filtrar</span>
+            <button type="button" class="filtro-sidebar__close" aria-label="Cerrar" (click)="cerrar()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+
+        <!-- Contenido (Formulario) -->
+        <div class="filtro-sidebar__content" [formGroup]="form">
+
+            <!-- 1. Estado (Checkbox) -->
+            <div class="custom-field">
+                <label class="field-label">Estado</label>
+                <div class="checkbox-list">
+                    @for (item of estados; track item.value) {
+                    <div class="p-field-checkbox">
+                        <p-checkbox [value]="item.value" formControlName="estados" [inputId]="'estado_' + item.value">
+                        </p-checkbox>
+                        <label [for]="'estado_' + item.value" class="custom-checkbox-label">{{ item.label }}</label>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="separator-line"></div>
+
+            <!-- 2. Área (Combobox) -->
+            <div class="custom-field">
+                <app-select label="Área" [options]="areas" placeholder="Seleccionar área" optionLabel="label"
+                    optionValue="value" formControlName="area">
+                </app-select>
+            </div>
+
+            <!-- 3. Tipo (Combobox) -->
+            <div class="custom-field">
+                <app-select label="Tipo" [options]="tipos" placeholder="Seleccionar tipo" optionLabel="label"
+                    optionValue="value" formControlName="tipo">
+                </app-select>
+            </div>
+
+            <!-- 4. Ramo (Combobox) -->
+            <div class="custom-field">
+                <app-select label="Ramo" [options]="ramos" placeholder="Seleccionar ramo" optionLabel="label"
+                    optionValue="value" formControlName="ramo">
+                </app-select>
+            </div>
+
+            <div class="separator-line"></div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="filtro-sidebar__footer">
+            <app-button severity="primary" label="APLICAR FILTROS" (onClick)="aplicarFiltros()"></app-button>
+            <app-button severity="secondary" label="LIMPIAR FILTROS" (onClick)="accionLimpiarFiltros()"></app-button>
+        </div>
+    </div>
+</app-sidebar>
