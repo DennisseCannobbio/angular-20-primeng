@@ -1,0 +1,85 @@
+<div class="bs-separador h-30 mobile-h-15"></div>
+
+<div class="bs-contenedor">
+    <div class="bs-separador" style="height: 50px;"></div>
+
+    <div class="header-section">
+        <h1 class="page-title">Notificaciones</h1>
+        <app-button severity="secondary" icon="add" label="CREAR NOTIFICACIÓN" class="min-w"></app-button>
+    </div>
+
+    <div class="actions-container w-100">
+        <div class="search-card">
+            <div class="input-wrapper">
+                <app-input-text label="Búsqueda" placeholder="Título de notificación o ID" fieldIcon="search"
+                    [(ngModel)]="busqueda">
+                </app-input-text>
+            </div>
+
+            <div class="calendar-wrapper">
+                <app-date label="Período" [(ngModel)]="periodo" placeholder="Selecciona un rango"
+                    selectionMode="range">
+                </app-date>
+            </div>
+            <div class="button-wrapper">
+                <app-button severity="primary" label="BUSCAR" (onClick)="buscar()" class="min-w"></app-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="result-actions-container">
+        <div class="left-actions">
+            <app-texto-busqueda [texto]="busquedaAplicada"></app-texto-busqueda>
+
+            @if (filtrosAplicados.length > 0) {
+            <div class="chips-container">
+                @for (chip of filtrosAplicados; track chip.id) {
+                <app-bs-chip [id]="chip.id" [label]="chip.label" state="removable"
+                    (track)="onChipAction($event)"></app-bs-chip>
+                }
+                <a href="javascript:void(0)" class="clear-chips-link" (click)="limpiarTodosLosChips()">Limpiar
+                    filtros</a>
+            </div>
+            }
+        </div>
+
+        <div class="right-actions">
+            <a href="javascript:void(0)" class="info-link">
+                <span class="material-symbols-outlined">info</span>
+                <span class="link-text">Conoce los estados de las notificaciones</span>
+            </a>
+
+            @if (!sinResultados) {
+            <div class="filter-actions">
+                <button type="button" class="filter-link" (click)="abrirFiltros()">
+                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M7.12629 16C6.84296 16 6.60546 15.9042 6.41379 15.7125C6.22212 15.5208 6.12629 15.2833 6.12629 15V9L0.20954 1.45C-0.0292936 1.15 -0.0639604 0.833333 0.10554 0.5C0.274873 0.166667 0.548456 0 0.92629 0H15.3263C15.7041 0 15.9777 0.166667 16.147 0.5C16.3165 0.833333 16.2819 1.15 16.043 1.45L10.1263 9V15C10.1263 15.2833 10.0305 15.5208 9.83879 15.7125C9.64712 15.9042 9.40962 16 9.12629 16H7.12629ZM8.12629 8.83325L13.7763 1.66675H2.47629L8.12629 8.83325Z"
+                            fill="currentColor" />
+                    </svg>
+                    <span>FILTRAR</span>
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+
+    @if (sinResultados) {
+    <app-sin-resultados [titulo]="'Sin notificaciones'" [mensaje]="'No hay notificaciones asociadas a la búsqueda.'">
+    </app-sin-resultados>
+    }
+
+    @if (!sinResultados) {
+    <div class="table-container">
+        <app-tabla-dinamica [data]="notificaciones" [columns]="columnas" [meta]="meta"
+            (accionClic)="onAccionClic($event)" (cambioPagina)="onPageChange($event)">
+        </app-tabla-dinamica>
+    </div>
+    }
+
+    <app-filtro-notificaciones [(visible)]="filtroVisible" [estados]="estados" [areas]="areas" [tipos]="tipos"
+        [ramos]="ramos" (onAplicarFiltros)="aplicarFiltros($event)" (onLimpiar)="limpiarFiltros()">
+    </app-filtro-notificaciones>
+
+
+</div>
